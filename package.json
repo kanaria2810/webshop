@@ -1,0 +1,14 @@
+{
+  "name": "questionname",
+  "version": "1.0.0",
+  "description": "Webshop",
+  "main": "index.js",
+  "author": "yennguyen",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.0.1",
+    "jquery": "^3.6.0"
+  }
+}
