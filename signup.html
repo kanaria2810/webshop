@@ -5,8 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABC.de Registrierung</title>
+    <!--Jquery-->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!--Bootstrap-->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--Font awesome-->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+
 </head>
-<body>
-    
+<body style="background-color: #bdd6fc;" >
+    <div class="page-header">
+        <a href="help.html" class="nav justify-content-end" style="margin: 10px 30px 0px 30px;">Need help?</a>
+        <div class="row col col-sm-10" style="padding-left: 50px; cursor: pointer;" onclick="window.location.href = 'startsite.html'">
+            <h2>Webshop</h2>
+        </div>
+    </div>
+    <section class="login-block" style="background-color: white; display: inline;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 login-sec">
+                    <h2 class="text-center" >Registrierung</h2>
+                    <form class="row g-3">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+        
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Vorname</label>
+                          <input type="text" class="form-control" id="inputName4">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputPassword4" class="form-label">Nachname</label>
+                          <input type="text" class="form-control" id="inputName4">
+                        </div>
+                        <div class="col-12">
+                          <label for="inputAddress" class="form-label">Address</label>
+                          <input type="text" class="form-control" id="inputAddress" placeholder="72764 Main St">
+                        </div>
+                        <div class="col-12">
+                          <label for="inputAddress2" class="form-label">Address 2</label>
+                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputCity" class="form-label">City</label>
+                          <input type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputZip" class="form-label">Zip</label>
+                          <input type="text" class="form-control" id="inputZip">
+                        </div>
+                        <div class="col-12">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                              Bestätigen smth
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <button type="Registrieren" class="btn btn-primary">Sign in</button>
+                        </div>
+                      </form>
+                    <br>
+                </div>
+                <div>
+                    <img src="image/them2.jpg" alt="" class="d-block w-50">
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

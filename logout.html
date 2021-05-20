@@ -1,3 +1,6 @@
+<!--Version 20.05
+    Zur Startseite
+    Session beenden-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +8,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABC Logout</title>
+    <!--Jquery-->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!--Bootstrap-->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--Font awesome-->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+
+    <!--Extra-->
+    <link rel="stylesheet" href="css/reset.css">
 </head>
 <body>
-    
+    <div class="page-header">
+        <a href="help.html" class="nav justify-content-end" style="margin: 10px 30px 0px 30px;">Need help?</a>
+        <div class="row col col-sm-10" style="padding-left: 50px; cursor: pointer;" onclick="window.location.href = 'startsite.html'">
+            <h4>Webshop</h4>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="row g-3" style="padding: 20px;">
+                <form class=" form-control form-control-lg align-items-center row-cols-lg-auto col-sm-7">
+            <h1>Vielen Dank!</h1>
+            <br>
+            <h2>Sie werden zur Startseite weitergeleitet.</h2>
+         </div>
+    </div>
 </body>
 </html>
