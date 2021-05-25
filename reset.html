@@ -25,26 +25,36 @@
     <link rel="stylesheet" href="css/reset.css">
 </head>
 <body >
-    <div class="page-header">
+    <header class="page-header">
         <a href="help.html" class="nav justify-content-end" style="margin: 10px 30px 0px 30px;">Need help?</a>
         <div class="row col col-sm-10" style="padding-left: 50px; cursor: pointer;" onclick="window.location.href = 'startsite.html'">
             <h3>Webshop</h3>
         </div>
-    </div>
-    <section class="reset-block" >
-        <div class="container">
-            <div class="row g-3" style="padding: 20px;">
-                <h5>Password zurücksetzen</h5>
-                <form class=" form-control form-control-lg align-items-center row-cols-lg-auto col-sm-7">
-                    <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Ihre Email eingeben:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    </div>
-                    <div class="d-grid">
-                        <button class="btn btn-primary btn-reset" type="button" >Submit</button>
-                    </div>
-                </form>
+    </header>
+    <section class="reset-block justify-content-center" >
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="row col-lg-6" style="padding: 20px;">
+                    <h5 style="margin-bottom: 40px;">Password zurücksetzen</h5>
+                    <form class=" form-control form-control-lg align-items-center row-cols-lg-auto col-sm-7">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Ihre Email eingeben:</label>
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text br-50" style="height: 50px"><i class="fas fa-at"></i></span>
+                                </div>
+                                <input type="text" placeholder="Neues Password wiedergeben" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-reset" type="button" >Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3"></div>
             </div>
+
             
         </div>
     </section>
