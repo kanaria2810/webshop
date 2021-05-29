@@ -104,6 +104,7 @@ footer .row .col-lg-4 {
 @media only screen and (max-width: 1000px) {
     .navbar-nav { 
         flex-direction: row;
+        display: inline-block;
     }
   }
 
@@ -112,7 +113,7 @@ footer .row .col-lg-4 {
 }
 
 .nav-item {
-    margin: 10px;
+    margin: 2%;
     width: max-content;
     
 }
