@@ -1,3 +1,10 @@
+<!-- - Nur eingeloggte User dürfen auf die Seite kommen
+    - Es gibt eine extra Seite in der die Bestellungen des Benutzers zu sehen sind.
+    - Hier gibt es bei jeder Bestellung einen Button („gleiche Bestellung nochmal“) 
+        mit der die Bestellung erneut bestellt werden kann
+        (Soll komplett automatisch funktionieren - 1 Click buy again)
+    - Der Benutzer bekommt dann auch wieder eine Rechnungsemail mit den Daten:
+        Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +12,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meine Bestellungen </title>
+
+    <!--Jquery-->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+    <!--Bootstrap-->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--Font awesome-->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+
+    <!--Extra-->
+    <link rel="stylesheet" href="css/startsite.css">
 </head>
 <body>
-    <div class="page-header">
-        <a href="help.html" class="nav justify-content-end" style="margin: 10px 30px 0px 30px;">Need help?</a>
-        <div class="row col col-sm-10" style="padding-left: 50px; cursor: pointer;" onclick="window.location.href = 'startsite.html'">
-            <h4>Webshop</h4>
+    <header>
+        <div class="row" id="navbar">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.html'" style="cursor: pointer;">
+                <h2>Armbanduhr.de</h2>
+            </div>
+            <div class="col-lg-7 col-md-8 col-sm-12">
+                <div class="d-flex justify-content-center">
+                    <div class="searchbar">
+                      <input class="search_input" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
+                      <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12" style="align-self: flex-end;">
+                <div class="row" id="help"><a href="help.html">Need help?</a></div>
+                <div class="row" id="log">
+                    <p> <button class="btn" onclick="window.location.href='shoppingcart.html'"><b>Warenkorb</b></button>
+                        <button class="btn" onclick="window.location.href='#'"><b>Bestellungen</b></button> </p>
+                </div>
+            </div>
         </div>
+    </header>
+    <div class="container">
+        <h2>Meine Bestellungen</h2>
+        <section>
+            <div class="row">
+                <div>
+                    <p>Bestellungaufgegeben: 28.01.2021</p>
+                </div>
+                <div>
+                    <p>Summe: EUR 20,00</p>
+                </div>
+                <div>
+                    <p>Versandsadresse: ABC - Straße 1, 72764 Reutlingen</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="thumbnail">
+
+                </div>
+                <div>
+                    <p>product-card-description</p>
+                    <button type="submit">Nochmals kaufen</button>
+                </div>
+
+            </div>
+        </section>
     </div>
-    
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Unsere AGB</a></li>
+            <li class="list-inline-item"><a href="#">Hinweis zur Cookies</a></li>
+            <li class="list-inline-item"><a href="#">Copyright</a></li>
+          </ul>
+        <div class="row justify-content-center">
+            Mustergesellschaft GmbH MusterStraße 4, 123456 Musterstadt
+        </div>
+    </footer>
 </body>
 </html>
