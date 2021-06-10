@@ -6,7 +6,7 @@ width:100%;
 
 }
 
-.card{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
+
 .body {
     background-image: -webkit-linear-gradient(to bottom, #8c9dff, #628dde);  /* Chrome 10-25, Safari 5.1-6 */
     background-image: linear-gradient(to bottom, #bdd6fc, #3c338d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
