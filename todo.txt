@@ -1,4 +1,17 @@
-11.06.2021
+1. Signup.html
+  X | Field validation: Ohne gültige Einträge kann die Registrierung nicht weitergeführt werden
+    | Doppelte Username validation: Geprüft mit AJAX im Hintergrund
+    | PHPMailer: Submit --> Registrierungsbestätigung als Email senden mit PHPMailer
+    | PHPMailer: Standardpassword selbst festlegen 
+    | Registrierungsbestätigung: Alert - erfolgreich registrieren. Onclick - startsite.html
+    | Serverseite: Hashwert von Kennwort generieren
+    | Serverseite: Neuen Eintrag von Benutzer einfügen
 
-- Shopping cart html mot ti nua thoi la xong
-- pay.html
+2. Login.html
+    | Login validation: Benutzername 
+    | Generiert Hashwert von Kennwort - nur Hash wird an Server übertragen
+    | Link zur Registrierung
+    | Link zur Passwortvergessen
+    | Login --> Richtig --> Session beginnen --> Overview.html
+    | Login falsch --> alert(Falsch)
+    | Beim Login werden Daten des Users gespeichert: Wann: Datum und Uhrzeit, Bildschirmauflösung, Betriebssystem
