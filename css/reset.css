@@ -1,14 +1,9 @@
 @import url("node_modules/@fortawesome/fontawesome-free/css/fontawesome.css");
 .reset-block{
-background-color: #bdd6fc;
+background-color: #ddd;
 float:left;
 width:100%;
 
 }
 
-
-.body {
-    background-image: -webkit-linear-gradient(to bottom, #8c9dff, #628dde);  /* Chrome 10-25, Safari 5.1-6 */
-    background-image: linear-gradient(to bottom, #bdd6fc, #3c338d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
 .btn-reset {background: #7562de; color:#fff; font-weight:600;}

@@ -1,8 +1,6 @@
 @import url("node_modules/@fortawesome/fontawesome-free/css/fontawesome.css");
 .login-block{
-    background: #6275de;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to bottom, #8c9dff, #628dde);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #bdd6fc, #3c338d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ddd;  /* fallback for old browsers */
     float:left;
     width:100%;
     padding : 50px 0px 80px;

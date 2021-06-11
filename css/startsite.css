@@ -7,7 +7,11 @@
     padding: 10px;
     }
 
-.search_input{
+body {
+    background: #ddd;
+}
+
+    .search_input{
     color: white;
     border: 0;
     outline: 0;
@@ -118,3 +122,25 @@ footer .row .col-lg-4 {
     
 }
 
+a {
+    color: #000;
+    text-decoration: none;
+    font-size:medium;
+}
+
+.in-den-warenkorb {
+    background-color: #009ED8;
+    color: white;
+    margin-top: 10px;
+
+}   
+.in-den-warenkorb :hover {
+    opacity:0.5;
+}
+
+.in-den-warenkorb:last-child {
+    text-align: center;
+}
+.product-card {
+    margin-bottom: 30px;
+}

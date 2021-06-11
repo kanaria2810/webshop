@@ -3,3 +3,22 @@
     font-size: larger;
     font-weight: bold;
 }
+
+.in-den-warenkorb {
+    background-color: #009ED8;
+    color: white;
+    margin-top: 10px;
+
+}   
+.in-den-warenkorb :hover {
+    opacity:0.5;
+}
+
+.in-den-warenkorb:last-child {
+    text-align: center;
+}
+
+
+.product-card {
+    margin-bottom: 30px;
+}
