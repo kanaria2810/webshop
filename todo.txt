@@ -28,13 +28,13 @@
  --> Password forget funktion
     |
  7. overview.html
-    | Produkte anzeigen mit php
+  X | Produkte anzeigen mit php
   X | Produkte in Datenbank eintragen
+    | Warenkorb anzeigen
  8. Database
   X | Relationship in Datenbank eintragen
 
 13.06.
-Produkt anzeigen mit php
 In den Warenkorb --> new Order nếu chưa có Order nào not closed, thêm vào order cũ nếu có order chưa closed
 --> uid --> orderid --> cartid
 lưu cartid này để truy vấn đến warenkorb

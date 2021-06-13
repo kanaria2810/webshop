@@ -5,7 +5,7 @@ session_start();
 if ($_SESSION['active'] != 1) {
 
   //Sofort logout
-  header("Location: ../login.html");
+  header("Location: ../startsite.html");
 }
 ?>
 <!DOCTYPE html>
@@ -151,77 +151,44 @@ if ($_SESSION['active'] != 1) {
         </div>
         <div class="col-lg-8 col-sm-12">
             <div class="row">
-            <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>
+                <?php
+                    try {
+                      //Datenbank settings
+                        $datenbankname = "webshop";
+                        $benutzername = "root";
+                        $benutzerpassword = "";
+                        $servername = "localhost";
+          
+                      //Verbindung zur Datenbank
+                        $conn = new PDO("mysql:host=$servername;dbname=$datenbankname", $benutzername, $benutzerpassword);
+          
+                        //Set the PDO error node to exception
+                        $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          
+                        $sql = "SELECT * FROM webshop.wsproduct";
+                        foreach ($conn -> query($sql) as $row) {
+                          echo '
+                            <div class="col-lg-3 col-sm-4 col-6 product-card">
+                            <img src="../'.$row['image'].' " alt="female_watch1" class="img-thumbnail">
+                            <hr>
+                            <span class="product-card-title">'.$row['title'].'</span> <br>
+                            <span class="product-card-description">'.$row['description'].'</span> <br>
+                            <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
+                            <div class="row" style="margin: 5px" >
+                                <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
+                            </div>
+                        </div>';
+                        }
+                        //Close connection
+                        $conn = NULL;   
+                    } catch (PDOException $th) {
+                        $handle = fopen ("error_login.txt", "w");
+                        fwrite ($handle, $th -> getMessage());
+                        fclose ($handle);
+                    }
 
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>
+                ?>
+
 
 
             </div>
