@@ -1,39 +1,10 @@
-1. startsite.html (ohne Registrierung)
-    - Sollen als 2 unterschiedliche Seiten entwickelt oder nur als overview?
-
-2. login.html
-    - Der Kunde muss sein Benutzername (E-mail) und Password eingeben können
-    - Es gibt einen Link zur Userregistrierung
-    - Password vergessen Funktion (User kann Password zurück setzen lassen)
-    - login Funktion: 
-        + Vor dem versenden der Daten, wird geprüft ob ein
-            Benutzername eingeben wurde (mindestens 3 Zeichen + @)
-        + Vor dem versenden der Daten wird geprüft ob ein
-            Kennwort eingegeben wurde, wenn ja wird ein HashGeneriert 
-            und nur der Hashwert wird an Server übertragen.
-        + Datenspeichern beim login
-            - Beim Login werden Daten des Users gespeichert
-            - Wann Datum und Uhrzeit
-            - Bildschirmauflösung (1280x768 oder 3840x2500...)
-            - Betriebssystem Mac OS, Windows, Android, Linux
 
 3. reset.html
 
 4. setpassword.html
 
-5. signup.html (User Registrierung)
-    - Es gibt ein Registrierungsformular mit allen notwendigen Feldern.
-    - Das Registrierungsformular kann nicht leer abgesendet werden.
-    - Die Registrierung verhindert doppelte Einträge, das heißt
-        ein Benutzer kann sich nicht 2-mal mit dem gleichen Benutzernamen registrieren.
-        + Benutzername wird mit AJAX im Hintergrund geprüft und 
-            im Formular sofort als Fehlerhaft angezeigt, falls dieser schon existiert
-    - Der Benutzer kann kein Passwort selbst festlegen, er bekommt ein Passwort mit der Registrierungsbestätigung
-    - Registrierungsbestätigung: Der Benutzer bekommt eine Registrierungsemail mit einem Standardpasswort
-
 6. overview.html (mit Registrierung)
     - Nur eingeloggte User dürfen auf die Seite kommen
-    - Firstlogin: Der Benutzer muss beim ersten Login sein Passwort neu vergeben
     - Das Passwort wird als Hash an den Server übertragen
     - Wenn der Benutzer eingeloggt ist, sieht er wie viele andere Benutzer gerade noch online sind.
         + Die Prüfung wird im Hintergrund mit AJAX ausgeführt.
@@ -42,9 +13,7 @@
         + Alle Artikel haben mindestens einen Namen und einen Preis und eine Stückzahl
         + Jeder Artikel hat ein Button mit dem eine Anzahl X in den Warenkorb gelegt werden kann.
     - Suche in der Artikelübersicht
-    - Der User wird begrüßt beim Login:
-        Herzlich Willkommen Herr/Frau Mayer. Sie waren zuletzt am 13.04.2021 online
-    - Es wird ein Karussell mit mindestens 3 Bildern angezeigt. //https://getbootstrap.com/docs/5.0/components/carousel/
+
     - Es befindet sich oben im Menü ein Warenkorbsymbol 
         => Auf das Symbol kann angeklickt werden und dann wird eine Warenkorb seite angezeigt.
     
@@ -79,10 +48,6 @@
     - Der Benutzer bekommt dann auch wieder eine Rechnungsemail mit den Daten:
         Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
 
-10. Datenbank: 
-    - eine kleines Datenbankdesign
-    - Alle Passwörter sind SHA512 verschlüsselt in der Datenbank gespeichert. 
-        Zu keinem Zeitpunkt kann ein Hacker die Passwörter wieder herstellen
 
 11. Weitere Anforderungen:
     - Bei der Registrierung können Nachnamen mit Sonderzeichen (ä, ö, ü, ...) angelegt werden.

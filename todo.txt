@@ -1,17 +1,40 @@
 1. Signup.html
   X | Field validation: Ohne gültige Einträge kann die Registrierung nicht weitergeführt werden
-    | Doppelte Username validation: Geprüft mit AJAX im Hintergrund
+  X | Doppelte Username validation: Geprüft mit AJAX im Hintergrund
     | PHPMailer: Submit --> Registrierungsbestätigung als Email senden mit PHPMailer
     | PHPMailer: Standardpassword selbst festlegen 
-    | Registrierungsbestätigung: Alert - erfolgreich registrieren. Onclick - startsite.html
+  X | Registrierungsbestätigung: Alert - erfolgreich registrieren. Onclick - startsite.html
     | Serverseite: Hashwert von Kennwort generieren
-    | Serverseite: Neuen Eintrag von Benutzer einfügen
+  X | Serverseite: Neuen Eintrag von Benutzer einfügen
 
 2. Login.html
-    | Login validation: Benutzername 
-    | Generiert Hashwert von Kennwort - nur Hash wird an Server übertragen
-    | Link zur Registrierung
-    | Link zur Passwortvergessen
-    | Login --> Richtig --> Session beginnen --> Overview.html
-    | Login falsch --> alert(Falsch)
+  X | Login validation: Benutzername 
+  X | Generiert Hashwert von Kennwort - nur Hash wird an Server übertragen
+  X | Link zur Registrierung
+  X | Link zur Passwortvergessen
+  X | Login --> Richtig --> Session beginnen --> Overview.php
+  X | Login falsch --> alert(Falsch)
     | Beim Login werden Daten des Users gespeichert: Wann: Datum und Uhrzeit, Bildschirmauflösung, Betriebssystem
+
+ 3. Logout.php
+ 4. overview.php
+    | Firstlogin (active==false): Der Benutzer muss beim ersten Login sein Passwort neu vergeben
+    | Der User wird begrüßt beim Login:
+      Herzlich Willkommen Herr/Frau Mayer. Sie waren zuletzt am 13.04.2021 online
+ 5. reset.html
+    | Trường hợp tự muốn reset mk (Firstlogin) --> check = Session -- làm trước
+    | Trường hợp quên mk --> ??? 
+ 6. setpassword.html
+ --> Password forget funktion
+    |
+ 7. overview.html
+    | Produkte anzeigen mit php
+  X | Produkte in Datenbank eintragen
+ 8. Database
+  X | Relationship in Datenbank eintragen
+
+13.06.
+Produkt anzeigen mit php
+In den Warenkorb --> new Order nếu chưa có Order nào not closed, thêm vào order cũ nếu có order chưa closed
+--> uid --> orderid --> cartid
+lưu cartid này để truy vấn đến warenkorb

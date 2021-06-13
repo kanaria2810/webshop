@@ -22,3 +22,8 @@
 .product-card {
     margin-bottom: 30px;
 }
+
+#log {
+    background-color: #e7cd3c;
+    color: #000;
+}

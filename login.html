@@ -20,6 +20,20 @@
 
     <!--Extra-->
     <link rel="stylesheet" href="css/login.css">
+
+    <!--Hashgenerator-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+
+    <script>
+        function generatehash() {
+            var pwdObj = document.getElementById('password');
+            var hashObj = new jsSHA("SHA-512", "TEXT", {numRounds: 1});
+            hashObj.update(pwdObj.value);
+            var hash = hashObj.getHash("HEX");
+            pwdObj.value = hash;
+        }
+    </script>
+
 </head>
 <body style="background-color: #ddd;" >
     <header>
@@ -33,19 +47,19 @@
             <div class="row">
                 <div class="col-lg-4 login-sec">
                     <h2 class="text-center" >Anmelden</h2>
-                    <form class="login-form">
+                    <form class="login-form" method="POST" action="php/login.php">
                         <div class="form-group">
                             <label for="exampleInputEmail1" class="text-uppercase" style="margin: 20px 0px 10px 0px;">E-Mail-Adresse</label>
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="email" class="form-control" placeholder="" name="username" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1" class="text-uppercase" style="margin: 20px 0px 10px 0px">Passwort</label>
-                            <input type="password" class="form-control" placeholder="">
+                            <input type="password" class="form-control" placeholder="" required maxlength="50" name="password" id="password">
                         </div>
                         <a href="reset.html">Passwort vergessen?</a>
                         <br>
                         <div class="d-grid">
-                            <button class="btn btn-block btn-login" type="button" style="margin-top: 20px;">Anmelden</button>
+                            <button class="btn btn-block btn-login" type="submit" style="margin-top: 20px;" onclick="generatehash();">Anmelden</button>
                           </div>
                     </form>
                     

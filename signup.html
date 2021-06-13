@@ -17,6 +17,39 @@
     <!--Font awesome-->
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
 
+    <script>
+      //Để check xem field email có trùng không
+      $(document).ready(function(){
+        $('#username').keyup(check_username); //use keyup,blur, or change
+        $(window).keydown(function(event){
+          if( (event.keyCode == 13) ) {
+            event.preventDefault();
+            return false;
+          }
+        });
+      });
+      function check_username(){
+        var username = $('#username').val();
+        var elem = document.getElementById("warning");
+          jQuery.ajax({
+            type: 'POST',
+            url: 'php/checkusername.php',
+            data: 'username='+ username,
+            cache: false,
+            success: function(response){
+                if(response != 0){
+                  elem.hidden=false;
+                  document.getElementById("submit").hidden = true;
+
+                } else {
+                  elem.hidden=true;
+                  document.getElementById("submit").hidden = false;
+                }
+            }
+              });
+      }
+    </script>
+
 </head>
 <body style="background-color: #ddd;" >
   <div class="page-header" style="margin-bottom: 4%;">
@@ -32,20 +65,24 @@
       <div class="row">
         <div class="col-md-6 login-sec">
           <h4 class="text-center" >Registrierung</h4>
-          <form class="row g-3 needs-validation" novalidate>
-            <div class="mb-3">
+          <form class="row g-3 needs-validation" novalidate method="POST" action="php/register.php" role="form">
+            <div class="mb-3" id="ajaxform">
               <label for="exampleInputEmail1" class="form-label"><b>Email:</b> </label>
-              <input type="email" class="form-control" id="exampleInputEmail1" required>
+              <input type="email" class="form-control" id="username" name="username" required>
               <div class="valid-feedback">
                 OK!
               </div>
               <div class="invalid-feedback">
                 Bitte gültige Email eingeben.
               </div>
+              <div id="warning" hidden style="color: red;">
+                Email wurde von anderem Benutzer registriert!
+
+              </div>
             </div>
             <div class="col-md-6">
               <label for="validationCustom02" class="form-label"><b>Vorname</b></label>
-              <input type="text" class="form-control" id="validationCustom02" required>
+              <input type="text" class="form-control" id="validationCustom02" name="firstname" required>
               <div class="valid-feedback">
                 OK!
               </div>
@@ -55,7 +92,7 @@
             </div>
             <div class="col-md-6">
               <label for="validationCustom02" class="form-label">Nachname</label>
-              <input type="text" class="form-control" id="validationCustom02" required>
+              <input type="text" class="form-control" id="validationCustom02" name="lastname" required>
               <div class="valid-feedback">
                 OK!
               </div>
@@ -65,25 +102,21 @@
             </div>
             <div class="col-12">
               <label for="inputAddress" class="form-label"><b>Adresse:</b> </label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Reutlingerstr. 123" required>
+              <input type="text" class="form-control" id="inputAddress" placeholder="Reutlingerstr. 123" name="address" required>
               <div class="invalid-feedback">
                 Ihre Adresse eingeben.
               </div>
             </div>
-            <div class="col-12">
-              <label for="inputAddress2" class="form-label"><b>Zusatzadresse:</b> </label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Wohnungsnummer/Zimmernummer">
-            </div>
             <div class="col-md-6">
               <label for="inputCity" class="form-label"><b>Stadt:</b> </label>
-              <input type="text" class="form-control" id="inputCity" required>
+              <input type="text" class="form-control" id="inputCity" name="city" required>
               <div class="invalid-feedback">
                 Ihre Stadt eingeben.
               </div>
             </div>
             <div class="col-md-6">
               <label for="inputZip" class="form-label"><b>PLZ:</b> </label>
-              <input type="text" class="form-control" id="inputZip" required>
+              <input type="text" class="form-control" id="inputZip" name="zip" required>
               <div class="invalid-feedback">
                 5-stellige Postleitzahl eingeben.
               </div>
@@ -100,15 +133,19 @@
               </div>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">Registrieren</button>
+                <button type="submit" class="btn btn-primary" id="submit">Registrieren</button>
             </div>
           </form>
           <script>
+
+                            
+            //Để check xem các field có validate không
             (function () {
               'use strict'
 
               // Fetch all the forms we want to apply custom Bootstrap validation styles to
-              var forms = document.querySelectorAll('.needs-validation')
+              var forms = document.querySelectorAll('.needs-validation');
+              
 
               // Loop over them and prevent submission
               Array.prototype.slice.call(forms)
@@ -122,7 +159,7 @@
                     form.classList.add('was-validated')
                   }, false)
                 })
-            })()
+            })();
           </script>
         </div>
         <div class="col-md-6 banner-sec">

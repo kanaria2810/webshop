@@ -1,0 +1,53 @@
+-- Add category
+SELECT * FROM `wscategory`
+INSERT INTO `wscategory` (`categoryid`, `title`, `description`) VALUES (NULL, 'Damenuhr', 'damenuhren'), (NULL, 'Herrenuhr', 'herrenuhren');
+
+-- Add Produkte
+SELECT * FROM `wsproduct`
+-- Damenuhren
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Festina Damenuhr', 'Festina Damenuhr mit goldenem Armband und Kristall', '1', 'image/female_watch1.jpg', '119.00');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Fossil Damenuhr', 'Fossil Damenuhr wei&szlig; mit wei&szlig;em Armband und ros&eacute;gold Uhrzeiger', '1', 'image/female_watch2.jpg', '99.00');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Gigandel Damenuhr', 'Gigandel Damenuhr ros&eacute;gold mit ros&eacute;goldem Armband', '1', 'image/female_watch3.jpg', '149.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Dugena Damenuhr', 'Dugena Damenuhr gold mit goldenem Armband und Uhrzeiger', '1', 'image/female_watch4.jpg', '79.00');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Regent Damenuhr', 'Regent Damenuhr violet silver mit silver Armband', '1', 'image/female_watch5.jpg', '99.00');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Adora Damenuhr', 'Adora Damenuhr gold wei&szlig; mit gro&szlig;en Uhrzeitangaben', '1', 'image/female_watch6.jpg', '74.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Candino Sapphire ', 'Candino Sapphire Damenuhr gold mit goldenen Uhrzeigern und Uhrzeitangaben', '1', 'image/female_watch7.jpg', '119.49');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Jobo Damenuhr', 'Jobo Damenuhr wei&szlig; gold mit Saphirglas mit Datumangaben', '1', 'image/female_watch8.jpg', '149.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Bering Ceramic', 'Bering Ceramic Damenuhr dunkel ros&eacute;gold krystal Uhrzeitangaben', '1', 'image/female_watch9.jpg', '249.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 's.Oliver Damenuhr', 's.Oliver Damenuhr weiß rosegold mit ros&eacute;golden Uhrzeitangaben und Armband', '1', 'image/female_watch10.jpg', '119.00');
+​-- Herrenuhren
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Rolex Oyster Perpetual', 'Rolex Oyster Perpetual Herrenuhr luxuriös – die Quintessenz der Oyster und Verkörperung eines klassischen und universellen Stils.', '2', 'image/male_watch1.jpg', '4199.00');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'A.Lange und Söhne Herrenuhr', 'A.Lange und Söhne Herrenuhr mit Lederarmband Datumangaben Monatangaben Glash&uuml;tte r&ouml;mische Uhrzeiger', '2', 'image/male_watch2.jpg', '999.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Maurice Lacroix', 'Maurice Lacroix Chronograph Automatic Automaticuhr mit Lederarmband', '2', 'image/male_watch3.jpg', '149.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Patek Philippe', 'Patek Philippe Geneve silver Datumangaben Swiss ', '2', 'image/male_watch4.jpg', '99.00');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Audemarz Piguez', 'Audemarz Piguez Automatikuhr Silver automatic Datumangaben', '2', 'image/male_watch5.jpg', '74.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Rolex Oyster Perpetual Submariner', 'Rolex Oyster Perpetual Submariner luxuriös Superlativer Chronometer Officially Certified ', '2', 'image/male_watch6.jpg', '14999.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Lacoste Herrenuhr', 'Lacoste Herrenuhr since 1927 dunkel schwarz schwarzem Armband', '2', 'image/male_watch7.jpg', '179.00');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Festina Herrenuhr', 'Festina Herrenuhr weiß mit Lederarmband Tachymeter Datumangaben', '2', 'image/male_watch8.jpg', '199.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Fossil Herrenuhr', 'Fossil Herrenuhr weiß mit Lederarmband', '2', 'image/male_watch9.jpg', '164.99');
+INSERT INTO `wsproduct` (`productid`, `title`, `description`, `categoryid`, `image`, `price`) VALUES (NULL, 'Jobo Herrenuhr', 'Jobo Herrenuhr blau mit Lederarmband Datumangaben', '2', 'image/male_watch10.jpg', '124.90');
+​
+--Foreign key erstellen
+
+    --product_category
+    ALTER TABLE `wsproduct` ADD INDEX(`categoryid`);
+    ALTER TABLE `wsproduct` ADD CONSTRAINT `product_category` FOREIGN KEY (`categoryid`) REFERENCES `wscategory`(`categoryid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+    --product_cartitem_cart
+
+        --product_cartitem
+        ALTER TABLE `wscartitem` ADD INDEX(`productid`);
+        ALTER TABLE `wscartitem` ADD CONSTRAINT `cartitem_product` FOREIGN KEY (`productid`) REFERENCES `wsproduct`(`productid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+        --cart_cartitem
+        ALTER TABLE `wscartitem` ADD INDEX(`cartid`);
+        ALTER TABLE `wscartitem` ADD CONSTRAINT `cartitem_cart` FOREIGN KEY (`cartid`) REFERENCES `wscart`(`idcart`) ON DELETE RESTRICT ON UPDATE RESTRICT; 
+
+--order_cart 1-1 Relationship
+ALTER TABLE `wsorder` ADD INDEX(`idcart`);
+ALTER TABLE `wsorder` ADD CONSTRAINT `order_cart` FOREIGN KEY (`idcart`) REFERENCES `wscart`(`idcart`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--order_user n-1 Relationship
+ALTER TABLE `wsorder` ADD INDEX(`iduser`);
+ALTER TABLE `wsorder` ADD CONSTRAINT `order_user` FOREIGN KEY (`iduser`) REFERENCES `wsuser`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+

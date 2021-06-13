@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+
+if ($_SESSION['active'] != 1) {
+
+  //Sofort logout
+  header("Location: ../login.html");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +19,18 @@
 
 
         <!--Jquery-->
-        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
         <!--Bootstrap-->
-        <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     
         <!--Font awesome-->
-        <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+        <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
     
         <!--Extra-->
-        <link rel="stylesheet" href="css/overview.css">
-        <link rel="stylesheet" href="css/startsite.css">
+        <link rel="stylesheet" href="../css/overview.css">
+        <link rel="stylesheet" href="../css/startsite.css">
 
 </head>
 <body>
@@ -29,15 +39,15 @@
             <div class="row" id="help" style="align-self: flex-end;">
                 <p style="text-align: end;">
                     <span style="margin-right: 20px;">Hallo John, Sie kaufen gerade mit 100 andere Kunden ein :)</span> 
-                    <a href="logout.html" style="margin: 10px;">Ausloggen</a> 
+                    <a href="logout.php" style="margin: 10px;">Ausloggen</a> 
                     <a href="help.html" style="margin: 10px;">Need help?</a>
                 </p>
 
             </div>
             <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.html'" style="cursor: pointer;">
-                <h2 style="margin: 0%;">Armbanduhr.de</h2>
+                <h2 style="margin-bottom: 10px">Armbanduhr.de</h2>
             </div>
-            <div class="col-lg-7 col-md-8 col-sm-12">
+            <div class="col-lg-8 col-md-8 col-sm-12" style="margin-bottom: 10px;">
                 <div class="d-flex justify-content-center">
                     <div class="searchbar">
                       <input class="search_input" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
@@ -45,17 +55,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-12 col-sm-12" style="align-self: flex-end;">
-                <div class="row" id="log">
-                    <p>
-                        <button class="btn" onclick="window.location.href='logout.html'"><b>Warenkorb</b></button>
-                        <button class="btn" onclick="window.location.href='logout.html'"><b>Bestellungen</b></button>
-                    </p>
-
+            <div class="col-lg-2 col-md-1 col-sm-12">
+                <div class = "row"  style="justify-content: flex-end; display: flex;">
+                    <button style="background-color: #e7cd3c; color: #000; height: 60px; width:60px; margin-right: 20px;" class="btn" onclick="window.location.href='../shoppingcart.html'"><i class="fas fa-shopping-cart"></i></button>            
+                    <button style="background-color: #e7cd3c; color: #000; height: 60px; width:60px; margin-right: 50px" id="log" class="btn" onclick="window.location.href='../orderhistory.html'"><i class="fas fa-history"></i></button>
                 </div>
             </div>
             <div>
-                <p class="message">Herzlich Willkommen auf ihrer persönlichen Startseite!</p>
+                <p class="message" style="margin-top: 10px;">Herzlich Willkommen auf ihrer persönlichen Startseite!</p>
             </div>
         </div>
     </header>
@@ -71,21 +78,21 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="image/Uhr2.jpg" class="d-block w-100" alt="...">
+                        <img src="../image/Uhr2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>First slide label</h5>
                             <p>Some representative placeholder content for the first slide.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="image/Uhr2.jpg" class="d-block w-100" alt="...">
+                        <img src="../image/Uhr2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Second slide label</h5>
                             <p>Some representative placeholder content for the second slide.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="image/Uhr1.jpg" class="d-block w-100" alt="...">
+                        <img src="../image/Uhr1.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
                             <p>Some representative placeholder content for the third slide.</p>
@@ -119,14 +126,23 @@
                     </li>                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Dropdown link
+                          Unsere Produkte
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                           <li><a class="dropdown-item" href="#">Damenuhren</a></li>
                           <li><a class="dropdown-item" href="#">Herrenuhren</a></li>
                         </ul>
                       </li>
-                    <li class="nav-item">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Ihr Account
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" href="setpassword.php">Passwort zurücksetzen</a></li>
+                        </ul>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link" href="#">Über uns</a>
                     </li>
                 </ul>
@@ -135,8 +151,19 @@
         </div>
         <div class="col-lg-8 col-sm-12">
             <div class="row">
+            <div class="col-lg-3 col-sm-4 col-6 product-card">
+                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
+                    <hr>
+                    <span class="product-card-title">Female_watch1</span> <br>
+                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
+                    <span class="product-card-price">190,90 €</span> 
+                    <div class="row" style="margin: 5px" >
+                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
+                    </div>
+                </div>
+
                 <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
+                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
                     <hr>
                     <span class="product-card-title">Female_watch1</span> <br>
                     <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
@@ -146,97 +173,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
-                    <hr>
-                    <span class="product-card-title">Female_watch1</span> <br>
-                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
-                    <span class="product-card-price">190,90 €</span> 
-                    <div class="row" style="margin: 5px" >
-                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
-                    </div>
-                </div>                
-                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
+                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
                     <hr>
                     <span class="product-card-title">Female_watch1</span> <br>
                     <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
@@ -246,7 +183,37 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-4 col-6 product-card">
-                    <img src="image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
+                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
+                    <hr>
+                    <span class="product-card-title">Female_watch1</span> <br>
+                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
+                    <span class="product-card-price">190,90 €</span> 
+                    <div class="row" style="margin: 5px" >
+                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-4 col-6 product-card">
+                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
+                    <hr>
+                    <span class="product-card-title">Female_watch1</span> <br>
+                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
+                    <span class="product-card-price">190,90 €</span> 
+                    <div class="row" style="margin: 5px" >
+                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-4 col-6 product-card">
+                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
+                    <hr>
+                    <span class="product-card-title">Female_watch1</span> <br>
+                    <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>
+                    <span class="product-card-price">190,90 €</span> 
+                    <div class="row" style="margin: 5px" >
+                        <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-4 col-6 product-card">
+                    <img src="../image/female_watch1.jpg" alt="female_watch1" class="img-thumbnail">
                     <hr>
                     <span class="product-card-title">Female_watch1</span> <br>
                     <span class="product-card-description">Lorem ipsum dolor sit amet.</span> <br>

@@ -1,10 +1,13 @@
-<!--
-    Version 20.05.2021
-    Color
-    Input color
-    Margin + padding
-    onclick = alert erfolgreich + redirect to login site
--->
+<?php
+
+session_start();
+
+if ($_SESSION['active'] != 1) {
+
+  //Sofort logout
+  header("Location: ../login.html");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,20 +15,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password wiederherstellen</title>
-    <link rel="shortcut icon" type="image/png" href="/image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
+    <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
     <!--Jquery-->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
     <!--Bootstrap-->
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!--Font awesome-->
-    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
     <!--Extra-->
-    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/startsite.css">
     <style>
         span {
             height: 50px;
@@ -56,39 +60,6 @@
             </div>
         </div>
     </header>
-    <!-- <div class="container h-200">
-        <div class="d-flex justify-content-center">
-            <div class="card mt-5 col-md-4 animated myForm">
-                <div class="card-header">
-                    <h5>Password zurücksetzen:</h5>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="dynamic_container">
-                            <div class="input-group">
-                                <label for="exampleInputPassword1" class="form-label">Neues Password:</label>
-                                <br>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text br-15"><i class="fas fa-key"></i></span>
-                                </div>
-                                <input type="password" class="form-controll" >
-                            </div>                    
-                            <div class="input-group">
-                                <label for="exampleInputPassword1" class="form-label">Neues Password wiedergeben:</label>
-                                <br>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text br-15"><i class="fas fa-key"></i></span>
-                                </div>
-                                <input type="password" class="form-controll" >
-                            </div>
-                        <div>
-                        <br>
-                        <button class="btn btn-primary btn-reset submit_btn" type="button" >Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> -->
     <div class="container h-100" style="background-color: transparent;">
         <div class="d-flex justify-content-center" >
             <div class="card mt-5 col-md-4 animated myForm">
@@ -108,7 +79,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text br-50"><i class="fas fa-key"></i></span>
                                 </div>
-                                <input type="text" placeholder="Neues Password wiedergeben" class="form-control"/>
+                                <input type="password" placeholder="Neues Password wiedergeben" class="form-control"/>
                             </div>
                         </div>
                         <div class="d-grid">
