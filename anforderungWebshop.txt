@@ -4,21 +4,10 @@
 4. setpassword.html
 
 6. overview.html (mit Registrierung)
-    - Nur eingeloggte User dürfen auf die Seite kommen
-    - Das Passwort wird als Hash an den Server übertragen
-    - Wenn der Benutzer eingeloggt ist, sieht er wie viele andere Benutzer gerade noch online sind.
-        + Die Prüfung wird im Hintergrund mit AJAX ausgeführt.
-        + Die User Anzahl aktualisiert sich automatisch und es muss nichts aktualisiert werden.
-    - Es gibt eine Artikelseite mit mindestens 8 Artikeln, einer sollte im Artikelnamen ü,ä,ö haben.
-        + Alle Artikel haben mindestens einen Namen und einen Preis und eine Stückzahl
-        + Jeder Artikel hat ein Button mit dem eine Anzahl X in den Warenkorb gelegt werden kann.
     - Suche in der Artikelübersicht
 
-    - Es befindet sich oben im Menü ein Warenkorbsymbol 
-        => Auf das Symbol kann angeklickt werden und dann wird eine Warenkorb seite angezeigt.
     
 7. shoppingcart.html
-    - Nur eingeloggte User dürfen auf die Seite kommen
     - Der Warenkorb zeigt die Artikel an die hinzugefügt worden sind mit Stückzahl an.
     - Kauft ein Kunde 10x den selben Artikel bekommt er auf jeden 15% Rabatt.
     - Die Stückzahl der Artikel kann im Warenkorb verändert werden.
@@ -27,17 +16,14 @@
     - Es ist sichergestellt, dass keine minus Stückzahlen bestellt werden können.
     - Es existiert ein Button der zur Bestellung/Kasse führt.
 8. pay.html
-    - Nur eingeloggte User dürfen auf die Seite kommen
     - Beim kassieren können 3 Versandarten ausgewählt werden. 
         1x DPD, 1x DHL und 1x DHL Express. 
         Bei der Express Variante kommt ein Aufschlag von +15€ drauf. 
         Die DPD Variante ist 5€ billiger wie die DHL Variante.
     - Es gibt eine Checkbox, die den Datenschutz akzeptiert.
         Diese muss bestätigt sein, damit die Bestellung abgeschickt werden kann.
-    - Es gibt einen Bezahlen Button der die Bestellung abschickt.
         https://getbootstrap.com/docs/5.0/examples/checkout/
-    - Nach dem Bezahlvorgang erhält der Benutzer eine Rechnungsemail mit den Daten: 
-        Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
+
 
 9. orderhistory.html
     - Nur eingeloggte User dürfen auf die Seite kommen
@@ -48,12 +34,3 @@
     - Der Benutzer bekommt dann auch wieder eine Rechnungsemail mit den Daten:
         Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
 
-
-11. Weitere Anforderungen:
-    - Bei der Registrierung können Nachnamen mit Sonderzeichen (ä, ö, ü, ...) angelegt werden.
-    - Artikel können auch Sonderzeichen enthalten und werden trotzdem richtig auf der Webseite dargestellt.
-    
-• Die Artikelseite kann auch ohne Login angeschaut werden.
-Ist das Design klar
-• Kann ein Fremder sich in den Webshop einloggen und
-kommt er zurecht

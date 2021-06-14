@@ -6,7 +6,15 @@
 
     $sUsername = "";
     $sPassword = "";
+    $sid = "";
+    $shippingname ="";
+    $shippingadress ="";
+    $shippingemail="";
     $bLoginSuccess = false;
+    if (!isset($_POST['username']) || !isset($_POST['password'])) {
+        header("Location: ../login.html");
+    }
+
     if (isset($_POST['username'])) {
         $sUsername = $_POST['username'];
     }
@@ -21,7 +29,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Fehler</title>
+        <title>Login...</title>
     </head>
     <body>
     </body>
@@ -46,20 +54,67 @@
 
         foreach ($conn -> query($sql) as $row) {
             $bLoginSuccess = true;
+            $sid =  $row['id'];
+            $shippingname = $row['firstname'].' '.$row['lastname'];
+            $shippingemail = $row['username'];
+            $shippingadress = $row['address'].' '.$row['zip'].' '.$row['city'];
             $_SESSION['id'] = $row['id'];
             $_SESSION['firstname'] = $row['firstname'];
             $_SESSION['lastname'] = $row['lastname'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['active'] = 1;
             $_SESSION['lastlogin'] = $row['lastlogin'];
+            $_SESSION['ispwreseted'] = $row['ispwreseted'];
+
         }
+
+        //set active = 1 for user
+        $sql2 = "UPDATE webshop.wsuser SET active = '1' WHERE id = $sid";
+        $conn->query($sql2);
+
+        //set lastlogin = now()
+        $sql3 = "UPDATE webshop.wsuser SET lastlogin = CURRENT_TIMESTAMP() WHERE id = $sid";
+        $conn->exec($sql3);
+
+        // Hier wird der Warenkorbdaten erstellen/aufrufen
+        // Check if es einen Order gibt, die isClosed == false
+        $sql4 = "SELECT COUNT(*) FROM webshop.wsorder WHERE iduser = '$sid' AND isclosed = '0'";
+        $object = $conn -> query($sql4);
+        $countorder = $object -> fetchColumn();
+        
+        if ($countorder == 0) { // Heißt es gibt keine offene Order
+            // // Wenn keine, erstell neuen Shopping cart
+            $sqlcart = "INSERT INTO webshop.wscart (idcart, iduser, createdat) VALUES ('',$sid,CURRENT_TIMESTAMP())";
+            $conn->exec($sqlcart);
+            //Take cartid
+            $sqlcartid = "SELECT idcart FROM webshop.wscart WHERE iduser= '$sid' ORDER BY createdat DESC LIMIT 1";
+            $res = $conn -> query($sqlcartid);
+            $idcart = $res -> fetchColumn();
+            //erstell neuen order not closed
+            $sqlorder = "INSERT INTO webshop.wsorder (idorder,iduser,idcart,shippingname,shippingemail,shippingaddress,paymentmethod,paymentname,paymentnumber,isclosed) VALUES ('', $sid, $idcart, '$shippingname', '$shippingemail', '$shippingadress', NULL, NULL, NULL, 0)";
+            $conn -> query($sqlorder);
+                $_SESSION['idcart'] = $idcart;
+
+        } else {
+            //Es gibt zumindest eine offene Order
+            $sqlqueryfororder = "SELECT * FROM webshop.wsorder WHERE iduser = '$sid' AND isclosed = '0' ORDER BY idcart DESC LIMIT 1";
+            foreach ($conn -> query($sqlqueryfororder) as $row) {
+                $_SESSION['idcart'] = $row['idcart'];
+            }
+        }
+        echo $_SESSION['idcart'];
+
+
+
+
         //Close connection
         $conn = NULL;
     } catch (PDOException $th) {
         echo $th -> getMessage();
     }
 
-    //Login Erfolgreich
+
+    // Login Erfolgreich
      if ($bLoginSuccess) {
 
         //Weiterleiten
@@ -80,7 +135,8 @@
               </script>'
         );
 
-
     }
+
+
 ?>
 

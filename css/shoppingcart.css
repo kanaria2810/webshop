@@ -137,7 +137,6 @@ input:focus::-webkit-input-placeholder {
 #number {
     padding: none;
     text-align: center;
-    width: 60px;
 }
 
 div.col a {

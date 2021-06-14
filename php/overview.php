@@ -6,7 +6,11 @@ if ($_SESSION['active'] != 1) {
 
   //Sofort logout
   header("Location: ../startsite.html");
+
 }
+
+// echo $_SESSION['idcart'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,33 +22,78 @@ if ($_SESSION['active'] != 1) {
     <link rel="shortcut icon" type="image/png" href="/image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
 
-        <!--Jquery-->
-        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <!--Jquery-->
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
-        <!--Bootstrap-->
-        <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    
-        <!--Font awesome-->
-        <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
-    
-        <!--Extra-->
-        <link rel="stylesheet" href="../css/overview.css">
-        <link rel="stylesheet" href="../css/startsite.css">
+    <!--Bootstrap-->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <!--Font awesome-->
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+
+    <script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!--Extra-->
+    <link rel="stylesheet" href="../css/overview.css">
+    <link rel="stylesheet" href="../css/startsite.css">
+    <script type="text/javascript">
+        function addproduct(productid) {
+            var pid = productid;
+            var id = 'amountitem' + productid;
+            var amount = document.getElementById(id).value;
+            $.ajax({
+            type: 'POST',
+            url: 'addproduct.php',
+            data: {
+                amount_product: amount,
+                product_id: pid,
+                cart_id: <?php echo $_SESSION['idcart']; ?>,
+            },
+            success: function(response){
+                if(response){
+                    swal({
+                        title: "Eingefügt",
+                        text: amount + " Produkt(e) wird in den Warenkorb erfolgreich eingefügt!",
+                        icon: "success",
+                        button: "OK!",
+                    });
+
+                } else {
+                    swal({
+                        title: "Fehler",
+                        text: "Produkt nicht verfügbar!",
+                        icon: "error",
+                        button: "OK!",
+                    });
+                }}
+              });
+
+        }
+
+        $(document).ready( () => {
+            setInterval(() => {
+                $.get("checkcustomeronline.php",{}, function(data) {
+                    var elem = document.getElementById("customernumber");
+                        elem.textContent = data;
+                    });
+            }, 60000);
+        });
+
+    </script>
 </head>
 <body>
     <header>
         <div class="row" id="navbar">
             <div class="row" id="help" style="align-self: flex-end;">
                 <p style="text-align: end;">
-                    <span style="margin-right: 20px;">Hallo John, Sie kaufen gerade mit 100 andere Kunden ein :)</span> 
+                    <span style="margin-right: 20px;">Hallo <?php echo $_SESSION['firstname'].' '.$_SESSION['lastname'] ?>, Sie kaufen gerade mit <b id="customernumber">21</b> andere Kunden ein :)</span> 
                     <a href="logout.php" style="margin: 10px;">Ausloggen</a> 
                     <a href="help.html" style="margin: 10px;">Need help?</a>
                 </p>
 
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.html'" style="cursor: pointer;">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = '../startsite.html'" style="cursor: pointer;">
                 <h2 style="margin-bottom: 10px">Armbanduhr.de</h2>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12" style="margin-bottom: 10px;">
@@ -57,7 +106,7 @@ if ($_SESSION['active'] != 1) {
             </div>
             <div class="col-lg-2 col-md-1 col-sm-12">
                 <div class = "row"  style="justify-content: flex-end; display: flex;">
-                    <button style="background-color: #e7cd3c; color: #000; height: 60px; width:60px; margin-right: 20px;" class="btn" onclick="window.location.href='../shoppingcart.html'"><i class="fas fa-shopping-cart"></i></button>            
+                    <button style="background-color: #e7cd3c; color: #000; height: 60px; width:60px; margin-right: 20px;" class="btn" onclick="window.location.href='shoppingcart.php'"><i class="fas fa-shopping-cart"></i></button>            
                     <button style="background-color: #e7cd3c; color: #000; height: 60px; width:60px; margin-right: 50px" id="log" class="btn" onclick="window.location.href='../orderhistory.html'"><i class="fas fa-history"></i></button>
                 </div>
             </div>
@@ -116,7 +165,7 @@ if ($_SESSION['active'] != 1) {
             <nav class="navbar bg-light justify-content-center">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Startseite</a>
+                        <a class="nav-link" href="../startsite.html">Startseite</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Warenkorb</a>
@@ -169,15 +218,21 @@ if ($_SESSION['active'] != 1) {
                         foreach ($conn -> query($sql) as $row) {
                           echo '
                             <div class="col-lg-3 col-sm-4 col-6 product-card">
-                            <img src="../'.$row['image'].' " alt="female_watch1" class="img-thumbnail">
-                            <hr>
-                            <span class="product-card-title">'.$row['title'].'</span> <br>
-                            <span class="product-card-description">'.$row['description'].'</span> <br>
-                            <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
-                            <div class="row" style="margin: 5px" >
-                                <button class="btn btn-block in-den-warenkorb">In den Einkaufswagen</button>
+                                <img src="../'.$row['image'].' " alt="female_watch1" class="img-thumbnail">
+                                <hr>
+                                <span class="product-card-title">'.$row['title'].'</span> <br>
+                                <span class="product-card-description">'.$row['description'].'</span> <br>
+                                <span class="product-card-description"> Noch '.$row['productamount'].' Stück</span> <br>
+                                <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
+                                <div class="row" style="margin-top: 5px; text-align:center; padding: 0px 50px 0px 50px" >
+                                    <input type="number" id="amountitem'.$row['productid'].'" placeholder="1" style="margin-top: 10px;display: block; margin-right: auto; margin-left: auto;">
+                                </div>
+                                <div>
+                                    <button class="btn btn-block in-den-warenkorb" style = "display: block; margin-right: auto; margin-left: auto;" onclick="addproduct('.$row['productid'].');">In den Einkaufswagen</button>
+                                </div>
                             </div>
-                        </div>';
+                        ';
+                        
                         }
                         //Close connection
                         $conn = NULL;   
@@ -210,3 +265,27 @@ if ($_SESSION['active'] != 1) {
     </footer>
 </body>
 </html>
+<?php
+    if ($_SESSION['ispwreseted'] == 0){
+        echo '
+            <script> swal({
+                title: "Erstes Login!",
+                text: "Sie müssen Ihr Passwort neu vergeben!",
+                icon: "info",
+                button: "OK!",
+            }).then(function() {
+                window.location = "setpassword.php";
+                });
+            </script>';
+    } else {
+        echo '
+        <script> swal({
+            title: "Hallo Herr/Frau '.$_SESSION['firstname']." ".$_SESSION['lastname'].'!",
+            text: "Sie waren zuletzt am '.substr($_SESSION['lastlogin'],0,10).' online!",
+            icon: "info",
+            button: "OK!",
+        });
+        </script>            
+        ';
+    }
+?>

@@ -15,14 +15,17 @@
   X | Login --> Richtig --> Session beginnen --> Overview.php
   X | Login falsch --> alert(Falsch)
     | Beim Login werden Daten des Users gespeichert: Wann: Datum und Uhrzeit, Bildschirmauflösung, Betriebssystem
+    | Warenkorb erstellen/aufrufen
 
  3. Logout.php
+    | Session destroy
+    | Active = 0
  4. overview.php
-    | Firstlogin (active==false): Der Benutzer muss beim ersten Login sein Passwort neu vergeben
-    | Der User wird begrüßt beim Login:
-      Herzlich Willkommen Herr/Frau Mayer. Sie waren zuletzt am 13.04.2021 online
+  X | Firstlogin (active==false): Der Benutzer muss beim ersten Login sein Passwort neu vergeben
+  X | Der User wird begrüßt beim Login: Herzlich Willkommen Herr/Frau Mayer. Sie waren zuletzt am 13.04.2021 online
+  X | Beim Login wird die Datum und Uhrzeit gespeichert
  5. reset.html
-    | Trường hợp tự muốn reset mk (Firstlogin) --> check = Session -- làm trước
+  X | Trường hợp tự muốn reset mk (Firstlogin) --> check = Session -- làm trước
     | Trường hợp quên mk --> ??? 
  6. setpassword.html
  --> Password forget funktion
@@ -31,10 +34,23 @@
   X | Produkte anzeigen mit php
   X | Produkte in Datenbank eintragen
     | Warenkorb anzeigen
+    | Produkt einfügen in den Warenkorb
+    | More (Wenn Zeit reicht) (Nen viet mail hoi)
  8. Database
   X | Relationship in Datenbank eintragen
+    | Stückzahl an Datenbank Produkt eintragen --> Description ändern
+ 9. Allgemein
+    | Metadata - icon
+    | Check if all the links work
 
+ 10. pay.html 
+ -- Show the Order
+    | Nach dem Bezahlvorgang erhält der Benutzer eine Rechnungsemail mit den Daten: Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
+    | Es gibt eine Checkbox, die den Datenschutz akzeptiert. Diese muss bestätigt sein, damit die Bestellung abgeschickt werden kann.
+ 11.orderhistory.html
+ -- Show the history
+ 12. shoppingcart.php
+  X | Show warenkorb inhalt
+    | Anzahl ändern
+    | Produkte löschen
 13.06.
-In den Warenkorb --> new Order nếu chưa có Order nào not closed, thêm vào order cũ nếu có order chưa closed
---> uid --> orderid --> cartid
-lưu cartid này để truy vấn đến warenkorb
