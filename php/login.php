@@ -10,6 +10,8 @@
     $shippingname ="";
     $shippingadress ="";
     $shippingemail="";
+    $city = "";
+    $zip = "";
     $bLoginSuccess = false;
     if (!isset($_POST['username']) || !isset($_POST['password'])) {
         header("Location: ../login.html");
@@ -57,7 +59,9 @@
             $sid =  $row['id'];
             $shippingname = $row['firstname'].' '.$row['lastname'];
             $shippingemail = $row['username'];
-            $shippingadress = $row['address'].' '.$row['zip'].' '.$row['city'];
+            $shippingadress = $row['address'];
+            $zip = $row['zip'];
+            $city = $row['city'];
             $_SESSION['id'] = $row['id'];
             $_SESSION['firstname'] = $row['firstname'];
             $_SESSION['lastname'] = $row['lastname'];
@@ -91,7 +95,7 @@
             $res = $conn -> query($sqlcartid);
             $idcart = $res -> fetchColumn();
             //erstell neuen order not closed
-            $sqlorder = "INSERT INTO webshop.wsorder (idorder,iduser,idcart,shippingname,shippingemail,shippingaddress,paymentmethod,paymentname,paymentnumber,isclosed) VALUES ('', $sid, $idcart, '$shippingname', '$shippingemail', '$shippingadress', NULL, NULL, NULL, 0)";
+            $sqlorder = "INSERT INTO webshop.wsorder (idorder,iduser,idcart,totalvalue,shippingmethod,shippingname,shippingemail,shippingaddress,zip,city,paymentmethod,paymentname,paymentnumber,isclosed) VALUES ('', $sid, $idcart, 0, '', '$shippingname', '$shippingemail', '$shippingadress', '$zip', '$city', NULL, NULL, NULL, 0)";
             $conn -> query($sqlorder);
                 $_SESSION['idcart'] = $idcart;
 

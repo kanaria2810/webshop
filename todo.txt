@@ -4,7 +4,7 @@
     | PHPMailer: Submit --> Registrierungsbestätigung als Email senden mit PHPMailer
     | PHPMailer: Standardpassword selbst festlegen 
   X | Registrierungsbestätigung: Alert - erfolgreich registrieren. Onclick - startsite.html
-    | Serverseite: Hashwert von Kennwort generieren
+  x | Serverseite: Hashwert von Kennwort generieren
   X | Serverseite: Neuen Eintrag von Benutzer einfügen
 
 2. Login.html
@@ -15,7 +15,7 @@
   X | Login --> Richtig --> Session beginnen --> Overview.php
   X | Login falsch --> alert(Falsch)
     | Beim Login werden Daten des Users gespeichert: Wann: Datum und Uhrzeit, Bildschirmauflösung, Betriebssystem
-    | Warenkorb erstellen/aufrufen
+  X | Warenkorb erstellen/aufrufen
 
  3. Logout.php
     | Session destroy
@@ -33,12 +33,12 @@
  7. overview.html
   X | Produkte anzeigen mit php
   X | Produkte in Datenbank eintragen
-    | Warenkorb anzeigen
-    | Produkt einfügen in den Warenkorb
+  x | Warenkorb anzeigen
+  x | Produkt einfügen in den Warenkorb
     | More (Wenn Zeit reicht) (Nen viet mail hoi)
  8. Database
   X | Relationship in Datenbank eintragen
-    | Stückzahl an Datenbank Produkt eintragen --> Description ändern
+  X | Stückzahl an Datenbank Produkt eintragen --> Description ändern
  9. Allgemein
     | Metadata - icon
     | Check if all the links work
@@ -47,10 +47,18 @@
  -- Show the Order
     | Nach dem Bezahlvorgang erhält der Benutzer eine Rechnungsemail mit den Daten: Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
     | Es gibt eine Checkbox, die den Datenschutz akzeptiert. Diese muss bestätigt sein, damit die Bestellung abgeschickt werden kann.
+    | Bestellen - nach dem Bestellung: alert erfolgreich + new warenkorb.php header overview;
  11.orderhistory.html
- -- Show the history
+    | Show the history
  12. shoppingcart.php
   X | Show warenkorb inhalt
-    | Anzahl ändern
-    | Produkte löschen
-13.06.
+  X | Anzahl ändern
+  X | Produkte löschen
+    | Zur Kasse gehen
+
+20.06
+-- Checkout . đổi các post của order
+-- Sau đó header ra newwarenkorb
+-- Sau đó header ra overview 
+-- làm orderhistory
+-- đổi amount trong dml

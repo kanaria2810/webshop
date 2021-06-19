@@ -5,7 +5,7 @@ session_start();
 if ($_SESSION['active'] != 1) {
 
   //Sofort logout
-  header("Location: ../startsite.html");
+  header("Location: startsite.php");
 
 }
 
@@ -31,9 +31,58 @@ $cid = $_SESSION['idcart'];
     <!--Font awesome-->
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
+    <!--Sweet Alert-->
+    <script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
+
     <!--Extra-->
     <link rel="stylesheet" href="../css/shoppingcart.css">
     <link rel="stylesheet" href="../css/startsite.css">
+
+    <script>
+        function addproduct(isadding,productid) {
+            var pid = productid;
+            var isa = isadding;
+            var id = 'amount' + productid;
+            var amount = parseInt(document.getElementById(id).textContent);
+            if (amount == 0) {
+                return  swal({ title: "Fehler",
+                        text: "Kann nicht weniger sein",
+                        icon: "error",
+                        button: "OK!",
+                    });
+            }
+            $.ajax({
+            type: 'POST',
+            url: 'addproduct.php',
+            data: {
+                product_id: pid,
+                cart_id: <?php echo $_SESSION['idcart']; ?>,
+                is_adding: isa
+            },
+            success: function(response){
+                if(response){
+                    document.getElementById(id).textContent = (isadding) ? amount+1 : amount-1;
+                    swal({
+                        title: "Eingefügt",
+                        text: "Produktanzahl erfolgreich geändert",
+                        icon: "success",
+                        button: "OK!",
+                    });
+
+                } else {
+                    swal({
+                        title: "Fehler",
+                        text: "Produkt nicht verfügbar!",
+                        icon: "error",
+                        button: "OK!",
+                    });
+                }}
+              });
+
+        }  
+    </script>
+
 </head>
 <body>
     <header>
@@ -114,6 +163,7 @@ $cid = $_SESSION['idcart'];
                             foreach($csql as $row){
                                 $pamount = $row['amount'];
                                 $productid = $row['productid'];
+                                
                                 $sql2 = "SELECT * FROM webshop.wsproduct WHERE productid= '$productid' ";
                                 $csql2 = $conn -> query($sql2);
                                 foreach ($csql2 as $row2) {
@@ -137,12 +187,14 @@ $cid = $_SESSION['idcart'];
                                             <div class="row text-muted">'.$categorytitle.'</div>
                                             <div class="row"><b>'.$producttitle.'</b></div>
                                         </div>
-                                        <div class="col-2"><a href="#">&minus;</a><input type="text" id="number" placeholder="'.$pamount.'" style = "padding: none; margin:none; width: 50px"><a href="#">+</a></div>
+                                        <div class="col-2"><a href="javascript:addproduct(0,'.$productid.');">&minus;</a>
+                                                <button type="text" class="btn" id="amount'.$productid.'" style = "padding: none; margin:none; width: 60px; height: 40px">'.$pamount.'</button>
+                                                <a href="javascript:addproduct(1,'.$productid.');">+</a></div>
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col" id="price">'.$productprice.' &euro;/Stück</div>
                                                 <div class="col">'.$productprice*$pamount.' &euro;</div>
-                                                <div class="col"><span class="close"><i class="fas fa-trash"></i></span></div>
+                                                <div class="col"><a href="deleteproduct.php?pid='.$productid.'&cid='.$_SESSION['idcart'].'" class="close"><i class="fas fa-trash"></i></a></div>
                                             </div>
             
                                         </div>
@@ -151,8 +203,6 @@ $cid = $_SESSION['idcart'];
                                     }
                                 }
                             }
-
-                            // Với mỗi item -> truy vấn đến Produkt để tìm name và categoryid -> categoryname
 
 
                             //Set the PDO error node to exception
@@ -189,24 +239,91 @@ $cid = $_SESSION['idcart'];
                         </div>
                     </div>
                     <hr>
-                    <form>
-                        <h5 style="margin-top: 4vh"><b>Lieferoption</b></h5>
-                        <select>
-                            <option class="text-muted">DPD - &euro; 3,99</option>
-                            <option class="text-muted">DHL - &euro; 5,99</option>
-                            <option class="text-muted">DHL-Express - &euro; 14,99</option>
-                        </select>
+                    <form class="needs-validation" method="POST" action="gotopay.php">
+                        <div>
+                            <h5 style="margin-top: 4vh"><b>Lieferoption</b></h5>
+                            <select id="deliveryoption" name="delivery" onchange="show(<?php echo $total-$totalrabatt?>);">
+                                <option value="3.99" selected>DPD - &euro; 3,99</option>
+                                <option value="5.99">DHL - &euro; 5,99</option>
+                                <option value="14.99">DHL-Express - &euro; 14,99</option>
+                            </select>                            
+                        </div>
+                        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                            <div class="col"><h5><b>Gesamtsumme</b> </h5></div>
+                            <div class="col" style="text-align:right"><span name="totalorder" id = "totalorder"></span>  &euro; </div>
+                        </div>                        
+                        <div class="row" style="margin: 0px 10px 0px 10px;"> <button class="btn btn-warning btn-block" type="submit"><strong>Zur Kasse</strong></button> </div>
+
+                        <script>
+                            (function () {
+                                'use strict'
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'checkproductavailable.php',
+                                    data: {
+                                        cart_id: <?php echo $_SESSION['idcart']; ?>
+                                    },
+                                    success: function(response){
+                                        if(response!=0){
+
+                                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                            var forms = document.querySelectorAll('.needs-validation');
+                                            
+
+                                            // Loop over them and prevent submission
+                                            Array.prototype.slice.call(forms)
+                                                .forEach(function (form) {
+                                                form.addEventListener('submit', function (event) {
+                                                    event.preventDefault()
+                                                    event.stopPropagation()
+                                                }, false)
+                                                })
+                                             swal({
+                                                title: "Fehler",
+                                                text: "Ein/Mehrere Produkte is nicht verfügbar",
+                                                icon: "error",
+                                                button: "OK!",
+                                                });                                                
+                                        }
+                                    }
+                                    });
+
+                                // // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                // var forms = document.querySelectorAll('.needs-validation');
+                                
+
+                                // // Loop over them and prevent submission
+                                // Array.prototype.slice.call(forms)
+                                //     .forEach(function (form) {
+                                //     form.addEventListener('submit', function (event) {
+                                //         if (!checkallproductavailable()) {
+                                //         event.preventDefault()
+                                //         event.stopPropagation()
+                                //         } 
+                                //     }, false)
+                                //     })
+                                })();
+                        </script>
+
+
                     </form>
 
-                    <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                        <div class="col"><h5><b>Gesamtsumme</b> </h5></div>
-                        <div class="col" style="text-align:right" >&euro; 137.00</div>
-                    </div>
-                    <div class="row" style="margin: 0px 10px 0px 10px;"> <button class="btn btn-warning btn-block"><strong>Zur Kasse</strong></button> </div>
+
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        var e = document.getElementById("deliveryoption");
+        function show() {
+            var delivery = e.value;
+            var totalorder = document.getElementById("totalorder");
+            var x = <?php echo $total-$totalrabatt?>;
+            totalorder.textContent = (x + parseFloat(delivery)).toFixed(2);
+        }
+        e.onchange=show;
+        show();
+    </script>
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <ul class="list-inline">
             <li class="list-inline-item"><a href="#">Unsere AGB</a></li>

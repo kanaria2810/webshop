@@ -9,7 +9,8 @@
 
     $productid = 0;
     $cartid = 0;
-    $amountproduct = 0;
+    $amountproduct = 1;
+    $isadding = 0;
 
     if (isset($_POST['product_id'])) {
         $productid = $_POST['product_id'];
@@ -19,6 +20,9 @@
     }
     if (isset($_POST['amount_product'])) {
         $amountproduct = $_POST['amount_product'];
+    }
+    if (isset($_POST['is_adding'])) {
+        $isadding = $_POST['is_adding'];
     }
     try {
         //Datenbank settings
@@ -45,7 +49,18 @@
             $amount = 0;
             $sqlcartitem = "SELECT * FROM webshop.wscartitem WHERE cartid = '$cartid' AND productid = '$productid'";
             foreach ($conn -> query($sqlcartitem) as $key) {
-                $amount = $key['amount']+ $amountproduct;
+                if ($isadding == 0) {
+                    $amount = $key['amount'] - $amountproduct;
+                    if ($amount<=0) {
+                        //delete item
+                        $sqlDeleteItem = "DELETE FROM webshop.wscartitem WHERE cartid = '$cartid' AND productid = '$productid'";
+                        $conn->exec($sqlDeleteItem);
+                    }
+                    
+                } else {
+                    $amount = $key['amount'] + $amountproduct;
+                }
+                
             }
             // echo $amount;
             $sqlsetamount = "UPDATE webshop.wscartitem SET amount = '$amount' WHERE cartid = '$cartid' AND productid = '$productid'";

@@ -5,7 +5,7 @@ session_start();
 if ($_SESSION['active'] != 1) {
 
   //Sofort logout
-  header("Location: ../startsite.html");
+  header("Location: /startsite.php");
 
 }
 
