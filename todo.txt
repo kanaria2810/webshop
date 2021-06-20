@@ -46,19 +46,24 @@
  10. pay.html 
  -- Show the Order
     | Nach dem Bezahlvorgang erhält der Benutzer eine Rechnungsemail mit den Daten: Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
-    | Es gibt eine Checkbox, die den Datenschutz akzeptiert. Diese muss bestätigt sein, damit die Bestellung abgeschickt werden kann.
-    | Bestellen - nach dem Bestellung: alert erfolgreich + new warenkorb.php header overview;
+  X | Es gibt eine Checkbox, die den Datenschutz akzeptiert. Diese muss bestätigt sein, damit die Bestellung abgeschickt werden kann.
+  X | Bestellen - nach dem Bestellung: alert erfolgreich + new warenkorb.php header overview;
  11.orderhistory.html
-    | Show the history
+  X | Show the history
+  X | Nochmals kaufen
  12. shoppingcart.php
   X | Show warenkorb inhalt
   X | Anzahl ändern
   X | Produkte löschen
-    | Zur Kasse gehen
+  X | Zur Kasse gehen
 
-20.06
--- Checkout . đổi các post của order
--- Sau đó header ra newwarenkorb
--- Sau đó header ra overview 
--- làm orderhistory
--- đổi amount trong dml
+21.06
+PHPMailer
+    | PHPMailer: Submit --> Registrierungsbestätigung als Email senden mit PHPMailer
+    | Nach dem Bezahlvorgang erhält der Benutzer eine Rechnungsemail mit den Daten: Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
+    | Auto Nochmals kaufen
+-- Relational Database - xem video và làm bài tập Übungsaufgaben
+
+22.06 
+    | Search
+    | Lưu thông tin người dùng

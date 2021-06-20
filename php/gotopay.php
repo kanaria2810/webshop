@@ -64,7 +64,7 @@ try {
 
 
     //Add deliveryoption & gesamtkosten to order = insert to wsorder set deliveryoption
-    $sqladddeliveryandvalue = "UPDATE webshop.wsorder SET shippingmethod = '$deliveryoption', totalvalue = '$total' WHERE idcart = $cid";
+    $sqladddeliveryandvalue = "UPDATE webshop.wsorder SET shippingmethod = '$deliveryoption', totalvalue = '$totalvalue' WHERE idcart = $cid";
     $conn -> query($sqladddeliveryandvalue);
 
     //Close connection

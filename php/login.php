@@ -80,33 +80,33 @@
         $sql3 = "UPDATE webshop.wsuser SET lastlogin = CURRENT_TIMESTAMP() WHERE id = $sid";
         $conn->exec($sql3);
 
-        // Hier wird der Warenkorbdaten erstellen/aufrufen
-        // Check if es einen Order gibt, die isClosed == false
-        $sql4 = "SELECT COUNT(*) FROM webshop.wsorder WHERE iduser = '$sid' AND isclosed = '0'";
-        $object = $conn -> query($sql4);
-        $countorder = $object -> fetchColumn();
+        // // Hier wird der Warenkorbdaten erstellen/aufrufen
+        // // Check if es einen Order gibt, die isClosed == false
+        // $sql4 = "SELECT COUNT(*) FROM webshop.wsorder WHERE iduser = '$sid' AND isclosed = '0'";
+        // $object = $conn -> query($sql4);
+        // $countorder = $object -> fetchColumn();
         
-        if ($countorder == 0) { // Heißt es gibt keine offene Order
-            // // Wenn keine, erstell neuen Shopping cart
-            $sqlcart = "INSERT INTO webshop.wscart (idcart, iduser, createdat) VALUES ('',$sid,CURRENT_TIMESTAMP())";
-            $conn->exec($sqlcart);
-            //Take cartid
-            $sqlcartid = "SELECT idcart FROM webshop.wscart WHERE iduser= '$sid' ORDER BY createdat DESC LIMIT 1";
-            $res = $conn -> query($sqlcartid);
-            $idcart = $res -> fetchColumn();
-            //erstell neuen order not closed
-            $sqlorder = "INSERT INTO webshop.wsorder (idorder,iduser,idcart,totalvalue,shippingmethod,shippingname,shippingemail,shippingaddress,zip,city,paymentmethod,paymentname,paymentnumber,isclosed) VALUES ('', $sid, $idcart, 0, '', '$shippingname', '$shippingemail', '$shippingadress', '$zip', '$city', NULL, NULL, NULL, 0)";
-            $conn -> query($sqlorder);
-                $_SESSION['idcart'] = $idcart;
+        // if ($countorder == 0) { // Heißt es gibt keine offene Order
+        //     // // Wenn keine, erstell neuen Shopping cart
+        //     $sqlcart = "INSERT INTO webshop.wscart (idcart, iduser, createdat) VALUES ('',$sid,CURRENT_TIMESTAMP())";
+        //     $conn->exec($sqlcart);
+        //     //Take cartid
+        //     $sqlcartid = "SELECT idcart FROM webshop.wscart WHERE iduser= '$sid' ORDER BY createdat DESC LIMIT 1";
+        //     $res = $conn -> query($sqlcartid);
+        //     $idcart = $res -> fetchColumn();
+        //     //erstell neuen order not closed
+        //     $sqlorder = "INSERT INTO webshop.wsorder (idorder,iduser,idcart,totalvalue,shippingmethod,shippingname,shippingemail,shippingaddress,zip,city,paymentmethod,paymentname,paymentnumber,isclosed) VALUES ('', $sid, $idcart, 0, '', '$shippingname', '$shippingemail', '$shippingadress', '$zip', '$city', NULL, NULL, NULL, 0)";
+        //     $conn -> query($sqlorder);
+        //         $_SESSION['idcart'] = $idcart;
 
-        } else {
-            //Es gibt zumindest eine offene Order
-            $sqlqueryfororder = "SELECT * FROM webshop.wsorder WHERE iduser = '$sid' AND isclosed = '0' ORDER BY idcart DESC LIMIT 1";
-            foreach ($conn -> query($sqlqueryfororder) as $row) {
-                $_SESSION['idcart'] = $row['idcart'];
-            }
-        }
-        echo $_SESSION['idcart'];
+        // } else {
+        //     //Es gibt zumindest eine offene Order
+        //     $sqlqueryfororder = "SELECT * FROM webshop.wsorder WHERE iduser = '$sid' AND isclosed = '0' ORDER BY idcart DESC LIMIT 1";
+        //     foreach ($conn -> query($sqlqueryfororder) as $row) {
+        //         $_SESSION['idcart'] = $row['idcart'];
+        //     }
+        // }
+        // echo $_SESSION['idcart'];
 
 
 
@@ -122,7 +122,7 @@
      if ($bLoginSuccess) {
 
         //Weiterleiten
-        header("Location: overview.php");
+        header("Location: newcart.php");
         
 
     } else{

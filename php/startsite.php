@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (isset($_SESSION['active'])) {
+    if ($_SESSION['active'] == 1) {
+        header("Location: overview.php");
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,18 +18,42 @@
     <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
 
-        <!--Jquery-->
-        <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <!--Jquery-->
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
-        <!--Bootstrap-->
-        <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    
-        <!--Font awesome-->
-        <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
-    
-        <!--Extra-->
-        <link rel="stylesheet" href="../css/startsite.css">
+    <!--Bootstrap-->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!--Font awesome-->
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+
+    <!--Extra-->
+    <link rel="stylesheet" href="../css/startsite.css">
+
+    <!-- Sweetalert -->
+    <script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script>
+            function login() {
+                swal({
+                    title: "Noch nicht zu kaufen",
+                    text: "Loggen Sie ein, um zahlreiche Produkte kaufen zu können",
+                    icon: "info",
+                    buttons: ["Abbrechen", "Zum Loginseite"],
+                }).then(function(isConfirm) {
+                    if (isConfirm) {
+                        window.location.href = "../login.html"
+
+                    }
+                    });
+            }
+
+            function more() {
+                swal('Funktion is der Zeit in der Entwicklungsphase');
+            }
+
+        </script>
 
 </head>
 <body>
@@ -144,7 +178,7 @@
                             <span class="product-card-description">'.$row['description'].'</span> <br>
                             <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
                             <div class="row" style="margin: 5px" >
-                                <button class="btn btn-block in-den-warenkorb" onclick="../login.html">In den Einkaufswagen</button>
+                                <button class="btn btn-block in-den-warenkorb" onclick="login();">In den Einkaufswagen</button>
                             </div>
                         </div>';
                         }
@@ -162,7 +196,7 @@
 
             </div>
             <div class="d-grid" id="more">
-                <button class="btn  btn-primary btn-block">More</button>
+                <button class="btn  btn-primary btn-block" onclick="more();">More</button>
             </div>
         </div>
     </section>

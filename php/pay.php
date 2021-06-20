@@ -5,7 +5,7 @@ session_start();
 if ($_SESSION['active'] != 1) {
 
   //Sofort logout
-  header("Location: /startsite.php");
+  header("Location: startsite.php");
 
 }
 
@@ -63,7 +63,7 @@ $cid = $_SESSION['idcart'];
                 <div class="row" id="help"><a href="help.html">Need help?</a></div>
                 <div class="row" id="log">
                     <p> <button class="btn" onclick="window.location.href='shoppingcart.php'"><b>Warenkorb</b></button>
-                        <button class="btn" onclick="window.location.href='#'"><b>Bestellungen</b></button> </p>
+                        <button class="btn" onclick="window.location.href='orderhistory.php'"><b>Bestellungen</b></button> </p>
                 </div>
             </div>
         </div>
@@ -119,17 +119,15 @@ $cid = $_SESSION['idcart'];
         case 'dpd':
           $deliveryfee = 3.99;
           break;
-          case 'dhl':
+        case 'dhl':
             $deliveryfee = 5.99;
             break;
-            case 'dhl-express':
+        case 'dhl-express':
               $deliveryfee = 14.99;
               break;        
-        default:
-              $deliveryfee = 3.99;
-          break;
       }
       $totalvalue = $row['totalvalue'];
+      $total = $totalvalue + $deliveryfee;
 
     }
 
@@ -156,7 +154,7 @@ $cid = $_SESSION['idcart'];
                 <div>
                   <h6 class="my-0">Artikelbetrag</h6>
                 </div>
-                <span class="text-muted">€ <?php echo $total ?></span>
+                <span class="text-muted">€ <?php echo $totalvalue ?></span>
               </li>
               <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
@@ -174,7 +172,7 @@ $cid = $_SESSION['idcart'];
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (EUR)</span>
-                <strong>€ <?php echo $totalvalue ?></strong>
+                <strong>€ <?php echo $total ?></strong>
               </li>
             </ul>
           </div>
@@ -240,11 +238,11 @@ $cid = $_SESSION['idcart'];
     
               <div class="my-3">
                   <div class="form-check">
-                    <input name="paymentmethod" type="radio" class="form-check-input" id="sepa" checked required>
+                    <input name="paymentmethod" type="radio" class="form-check-input" value="sepa" checked required>
                     <label class="form-check-label" for="credit">Lastschrift (SEPA)</label>
                   </div>
                   <div class="form-check">
-                    <input name="paymentmethod" type="radio" class="form-check-input" id="credit" required>
+                    <input name="paymentmethod" type="radio" class="form-check-input" value="credit" required>
                     <label class="form-check-label" for="debit">Kreditkarte</label>
                   </div>
               </div>

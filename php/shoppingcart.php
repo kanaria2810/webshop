@@ -45,7 +45,7 @@ $cid = $_SESSION['idcart'];
             var isa = isadding;
             var id = 'amount' + productid;
             var amount = parseInt(document.getElementById(id).textContent);
-            if (amount == 0) {
+            if (amount == 0 & isa == 0) {
                 return  swal({ title: "Fehler",
                         text: "Kann nicht weniger sein",
                         icon: "error",
@@ -87,7 +87,7 @@ $cid = $_SESSION['idcart'];
 <body>
     <header>
         <div class="row" id="navbar">
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = '../startsite.html'" style="cursor: pointer;">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'overview.php'" style="cursor: pointer;">
                 <h2>Armbanduhr.de</h2>
             </div>
             <div class="col-lg-7 col-md-8 col-sm-12">
@@ -106,7 +106,7 @@ $cid = $_SESSION['idcart'];
                 </div>
                 <div class="row" id="log">
                     <p> <button class="btn" onclick="window.location.href='#'"><b>Warenkorb</b></button>
-                        <button class="btn" onclick="window.location.href='orderhistory'"><b>Bestellungen</b></button> </p>
+                        <button class="btn" onclick="window.location.href='orderhistory.php'"><b>Bestellungen</b></button> </p>
                 </div>
             </div>
         </div>

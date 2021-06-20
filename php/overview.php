@@ -93,7 +93,7 @@ if ($_SESSION['active'] != 1) {
                 </p>
 
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = '../startsite.html'" style="cursor: pointer;">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'o'" style="cursor: pointer;">
                 <h2 style="margin-bottom: 10px">Armbanduhr.de</h2>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12" style="margin-bottom: 10px;">
@@ -225,7 +225,7 @@ if ($_SESSION['active'] != 1) {
                                 <span class="product-card-description"> Noch '.$row['productamount'].' Stück</span> <br>
                                 <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
                                 <div class="row" style="margin-top: 5px; text-align:center; padding: 0px 50px 0px 50px" >
-                                    <input type="number" id="amountitem'.$row['productid'].'" placeholder="1" style="margin-top: 10px;display: block; margin-right: auto; margin-left: auto;">
+                                    <input type="number" id="amountitem'.$row['productid'].'" value="1" style="margin-top: 10px;display: block; margin-right: auto; margin-left: auto;">
                                 </div>
                                 <div>
                                     <button class="btn btn-block in-den-warenkorb" style = "display: block; margin-right: auto; margin-left: auto;" onclick="addproduct('.$row['productid'].');">In den Einkaufswagen</button>

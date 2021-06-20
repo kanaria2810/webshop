@@ -51,7 +51,7 @@
             foreach ($conn -> query($sqlcartitem) as $key) {
                 if ($isadding == 0) {
                     $amount = $key['amount'] - $amountproduct;
-                    if ($amount<=0) {
+                    if ($amount<0) {
                         //delete item
                         $sqlDeleteItem = "DELETE FROM webshop.wscartitem WHERE cartid = '$cartid' AND productid = '$productid'";
                         $conn->exec($sqlDeleteItem);
