@@ -1,3 +1,5 @@
+
+
 <?php 
     session_start();
 
@@ -27,6 +29,13 @@
     $paymentmethod="";
     $paymentname="";
     $paymentnumber="";
+
+    $shippingfee = 0;
+    $amount = 0;
+
+    $htmlconfirmmail = "";
+    $alternativeconfirmmail = "";
+
     try {
         //Datenbank settings
         $datenbankname = "webshop";
@@ -55,6 +64,28 @@
             $paymentnumber=$row['paymentnumber'];
         }
 
+        $htmlconfirmmail = ' <h2>Best&auml;tigung Ihres Einkaufs</h2> <b>Sehr geehrte Herr/Frau '.$shippingname.',</b>'.
+        '<p>hiermit bestätigen wir Ihr Einkauf mit folgenden Informationen:</p><ul>'.
+        '<li>Versandadresse: '.$shippingaddress.', '.$zip.' '.$city;
+
+        switch ($shippingmethod) {
+            case 'dpd':
+                $shippingfee = 3.99;
+                break;
+            case 'dpd':
+                $shippingfee = 5.99;
+                break;
+            case 'dhl-express':
+                $shippingfee = 14.99;
+                break;    
+
+            default:
+                $shippingfee = 3.99;
+                break;
+        }
+
+        $htmlconfirmmail .= '<li>Versandsart: '.strtoupper($shippingmethod).'</li> <li>Versandskosten: '.$shippingfee."</li> </ul> <table border='1'> <thead> <th>Artikelname</th><th>Anzahl</th></thead>";
+
 
         //Check if all products are available
         $sql = "SELECT * FROM webshop.wscartitem WHERE cartid= '$idcart' ORDER BY productid";
@@ -63,6 +94,8 @@
         foreach($csql as $row){
             $pamount = $row['amount'];
             $productid = $row['productid'];
+            $amount += $pamount;
+
             
             //count missing product
             $sql2 = "SELECT * FROM webshop.wsproduct WHERE productid= '$productid' ";
@@ -93,15 +126,14 @@
                     //set new amount for product
                     $sql3 = "UPDATE webshop.wsproduct SET productamount = '$newamount' WHERE productid = '$productid'";
                     $conn -> query($sql3);
+                    $htmlconfirmmail .= ' <tr> <td> '.$row2["title"].'</td> <th>'.$row['amount'].'</th> </tr>';
+
                 }
             }
-            echo 1;
-        } else {
-            echo 0;
+            $htmlconfirmmail .= "</table><p><b>Artikelmenge: ".$amount."</b></p> <p><b>Gesamtsumme: ".$totalvalue."&euro;</b></p> Mit freundlichen Grüßen <br> Ihr Armbanduhr.de" ;
+
+            echo json_encode([$amountmissingproduct, $_SESSION['username'], $_SESSION['firstname'].' '.$_SESSION['lastname'], $htmlconfirmmail, $alternativeconfirmmail ]);
         }
-
-
-
 
         //Close connection
         $conn = NULL;
@@ -111,3 +143,7 @@
         fclose ($handle);  
     }
 ?>
+
+
+
+

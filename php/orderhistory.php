@@ -84,22 +84,41 @@
                                 order_id: ido
                             },
                             success: function(response){
-                                if(response==0){
+                                var id_numbers = JSON.parse(response);
+                                console.log(id_numbers[0]);
+                                if(id_numbers[0] == 0){
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: 'phpmailer/sendmail.php',
+                                        data: {
+                                            email_address : id_numbers[1],
+                                            name_address : id_numbers[2],
+                                            subject : "Armbanduhr.de - Ihre Zahlung an Armbanduhr.de" ,
+                                            body : id_numbers[3] ,
+                                            alt_body :  id_numbers[4]
+                                        },
+                                        success: function(response){
+                                            console.log('Mail sent');    
+                                            }
+                                    });
+                                    swal({
+                                        title: "Bestellung nochmals aufgegeben",
+                                        text: "Bestätigungsemail wird Ihnen gesendet",
+                                        icon: "success",
+                                        button: "OK!",
+                                    }).then(() => {location.reload();});
+                                } else {
                                     swal({
                                         title: "Fehlende Produkte!",
                                         text: "Produkt nicht verfügbar!",
                                         icon: "error",
                                         button: "OK!",
                                     });
-                                } else {
-                                    swal({
-                                        title: "Bestellung nochmals aufgegeben",
-                                        text: "Bestätigungsemail wird Ihnen gesendet",
-                                        icon: "success",
-                                        button: "OK!",
-                                    });
-                                    location.reload();
-                                }}
+                                }
+                                
+
+                            }
                             });
 
                     }

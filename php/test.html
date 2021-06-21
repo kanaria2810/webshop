@@ -1,1 +1,56 @@
-<button></button>
+
+<!-- + Artikelname + Artikelanzahl +  +  -->-->
+<h2>Best&auml;tigung Ihres Einkaufs</h2>
+
+<b>Sendungsnummer: 123 </b>
+
+<b>Sehr geehrte Herr/Frau Müller,</b>
+
+<p>hiermit bestätigen wir Ihr Einkauf mit folgenden Informationen:</p>
+<ul>
+
+    <li>Versandadresse: </li>
+
+
+
+
+
+
+    <li>Versandsart: </li> <li>Versandskosten:</li> </ul> <table border="1"> <thead> <th>Artikelname</th><th>Anzahl</th></thead>
+
+
+
+
+
+    <tr>
+        <td>Herrenuhr</td>
+        <th>12</th>
+    </tr>
+</table> 
+
+<p><b>Artikelmenge: </b></p>
+<p><b>Gesamtsumme: &euro;</b></p>
+Mit freundlichen Grüßen
+Ihr Armbanduhr.de
+
+
+
+
+<script> 
+
+    $.ajax({
+        type: 'POST',
+        url: 'phpmailer/sendmail.php',
+        data: {
+            email_address : '<?php echo $sUsername; ?>',
+            name_address : "<?php echo $sFirstname.' '.$sLastname ?>",
+            subject : "Armbanduhr.de - Ihre Zahlung an Armbanduhr.de" ,
+            body : "<?php echo $htmlconfirmmail ?>" ,
+            alt_body :  '<?php echo $alternativeconfirmmail ?>'
+        },
+        success: function(response){
+            console.log('Mail sent');    
+            }
+    });
+
+</script>

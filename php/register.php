@@ -94,15 +94,48 @@
         if (parseInt(i.innerHTML)!=0) {
             i.innerHTML = parseInt(i.innerHTML)-1;
         }
-        }
-        setInterval(function(){ countdown(); },1000);
+    }
+    setInterval(function(){ countdown(); },1000);
+
+    
+    <?php
+    $htmlconfirmmail = "<h2> Herzlich wilkommen zu Armbanduhr.de! </h2> <h4>Sehr geehrte Herr/Frau ".$sFirstname." ".$sLastname."</h4>".
+                        "<p>Sie haben sich für unser Armbanduhr.de registriert. Ihr Standardpassword ist ".$sLastname."!".substr($sUsername, 0, strpos($sUsername, '@'))."![Ihr-Email-Adresse-ohne-Domainname]</p>".
+                        "<p>Mit freundlichen Gr&uuml;ßen, <br>".
+                        "Ihr Armbanduhr Team </p>";
+    ?>
+
+    function sendconfirmmail() {
+        $.ajax({
+        type: 'POST',
+        url: 'phpmailer/sendmail.php',
+        data: {
+            // $emailaddress = "";
+            // $nameaddress = "";
+
+            // $subject = "";
+            // $body = "";
+            // $altbody = "";
+            email_address : '<?php echo $sUsername; ?>',
+            name_address : "<?php echo $sFirstname.' '.$sLastname ?>",
+            subject : "Armbanduhr.de - Registrierungsconfirmation" ,
+            body : "<?php echo $htmlconfirmmail ?>" ,
+            alt_body :  '<?php echo "Sehr geehrte Herr/Frau ".$sFirstname." ".$sLastname.
+                                    ", Sie haben sich f&uuml;r unser Armbanduhr.de registriert. Ihr Standardpassword ist ".$sLastname."!".substr($sUsername, 0, strpos($sUsername, '@')).
+                                    "Mit freundlichen Gr&uuml;ßen, Ihr Armbanduhr Team " ?>'
+        },
+        success: function(response){
+            console.log('Mail sent');    
+            }
+        });
+    }
     </script>
 
 </head>
 <body>
     <div class="page-header">
         <a href="help.html" class="nav justify-content-end" style="margin: 10px 30px 0px 30px;">Need help?</a>
-        <div class="row col col-sm-10" style="padding-left: 50px; cursor: pointer;" onclick="window.location.href = 'startsite.html'">
+        <div class="row col col-sm-10" style="padding-left: 50px; cursor: pointer;" onclick="window.location.href = 'startsite.php'">
             <h4>Armbanduhr.de</h4>
         </div>
     </div>
@@ -125,6 +158,7 @@
         </div>
     </footer>
     <script>
+        sendconfirmmail();
         swal({
             title: "Erfolgreich!",
             text: "Sie haben erfolgreich registriert!",

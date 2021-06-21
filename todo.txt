@@ -59,11 +59,12 @@
 
 21.06
 PHPMailer
-    | PHPMailer: Submit --> Registrierungsbestätigung als Email senden mit PHPMailer
-    | Nach dem Bezahlvorgang erhält der Benutzer eine Rechnungsemail mit den Daten: Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
-    | Auto Nochmals kaufen
+  X | PHPMailer: Submit --> Registrierungsbestätigung als Email senden mit PHPMailer
+  X | Nach dem Bezahlvorgang erhält der Benutzer eine Rechnungsemail mit den Daten: Artikelmenge + Artikelname + Artikelanzahl + Versand + Gesamtsumme
+  X | Auto Nochmals kaufen
 -- Relational Database - xem video và làm bài tập Übungsaufgaben
 
 22.06 
+    | Logout
     | Search
     | Lưu thông tin người dùng

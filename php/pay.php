@@ -127,7 +127,6 @@ $cid = $_SESSION['idcart'];
               break;        
       }
       $totalvalue = $row['totalvalue'];
-      $total = $totalvalue + $deliveryfee;
 
     }
 
@@ -154,7 +153,7 @@ $cid = $_SESSION['idcart'];
                 <div>
                   <h6 class="my-0">Artikelbetrag</h6>
                 </div>
-                <span class="text-muted">€ <?php echo $totalvalue ?></span>
+                <span class="text-muted">€ <?php echo $total ?></span>
               </li>
               <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
@@ -172,7 +171,7 @@ $cid = $_SESSION['idcart'];
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (EUR)</span>
-                <strong>€ <?php echo $total ?></strong>
+                <strong>€ <?php echo $totalvalue ?></strong>
               </li>
             </ul>
           </div>
@@ -198,7 +197,7 @@ $cid = $_SESSION['idcart'];
     
                 <div class="col-12">
                   <label for="address" class="form-label">Adresse</label>
-                  <input type="text" name="shippingadress" class="form-control" id="address" value="<?php echo $shippingaddress ?>" required>
+                  <input type="text" name="shippingaddress" class="form-control" id="address" value="<?php echo $shippingaddress ?>" required>
                   <div class="invalid-feedback">
                     Bitte gültige Versandsadresse eingeben.
                   </div>
