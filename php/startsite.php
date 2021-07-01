@@ -146,8 +146,8 @@ if (isset($_SESSION['active'])) {
                           Uhren
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <li><a class="dropdown-item" href="#">Damenuhren</a></li>
-                          <li><a class="dropdown-item" href="#">Herrenuhren</a></li>
+                          <li><a class="dropdown-item" href="search.php?keyword=Damenuhr">Damenuhren</a></li>
+                          <li><a class="dropdown-item" href="search.php?keyword=Herreuhr">Herrenuhren</a></li>
                         </ul>
                       </li>
                     <li class="nav-item">

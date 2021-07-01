@@ -73,7 +73,9 @@ $cid = $_SESSION['idcart'];
                         text: "Produktanzahl erfolgreich geändert",
                         icon: "success",
                         button: "OK!",
-                    });
+                    }).then(function() {
+                        window.location.href = "shoppingcart.php";
+                        });
 
                 } else {
                     swal({
@@ -199,7 +201,7 @@ $cid = $_SESSION['idcart'];
                                     <div class="row">
                                         <div class="col" id="price">'.$productprice.' &euro;/Stück</div>
                                         <div class="col">'.$productprice*$pamount.' &euro;</div>
-                                        <div class="col"><a href="deleteproduct.php?pid='.$productid.'&cid='.$_SESSION['idcart'].'" class="close"><i class="fas fa-trash"></i></a></div>
+                                        <div class="col"><a href="phpfunction/deleteproduct.php?pid='.$productid.'&cid='.$_SESSION['idcart'].'" class="close"><i class="fas fa-trash"></i></a></div>
                                     </div>
     
                                 </div>

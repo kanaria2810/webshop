@@ -1,0 +1,24 @@
+
+//create database webshop
+CREATE DATABASE `webshop`;
+
+//wsuser - Kunden
+CREATE TABLE `webshop`.`wsuser` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,  `username` VARCHAR(50) NOT NULL ,  `lastname` VARCHAR(50) NOT NULL ,  `password` VARCHAR(512) NOT NULL ,  `address` VARCHAR(50) NOT NULL ,  `city` VARCHAR(50) NOT NULL ,  `zip` INT(10) NOT NULL ,  `active` TINYINT(1) NOT NULL ,  `lastlogin` TIMESTAMP(6) NULL DEFAULT CURRENT_TIMESTAMP(6) ,  `ispwreseted` TINYINT(1) NOT NULL ,  `token` VARCHAR(50) NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
+
+//wsorder - Order
+CREATE TABLE `webshop`.`wsorder` ( `idorder` INT(15) NOT NULL AUTO_INCREMENT , `iduser` INT(15) NOT NULL , `idcart` INT(15) NOT NULL , `totalvalue` FLOAT(15,2) NOT NULL , `shippingmethod` VARCHAR(20) NOT NULL DEFAULT 'dpd' , `shippingname` VARCHAR(50) NOT NULL , `shippingemail` VARCHAR(50) NOT NULL , `shippingaddress` VARCHAR(50) NOT NULL , `zip` INT(15) NOT NULL , `city` VARCHAR(15) NOT NULL , `paymentmethod` VARCHAR(50) NULL DEFAULT NULL , `paymentname` VARCHAR(50) NULL DEFAULT NULL , `paymentnumber` INT(11) NULL DEFAULT NULL , `placedtime` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP , `isclosed` TINYINT(1) NOT NULL , PRIMARY KEY (`idorder`)) ENGINE = InnoDB;
+
+//wsproduct - Produkte
+CREATE TABLE `webshop`.`wsproduct` ( `productid` INT(15) NOT NULL AUTO_INCREMENT , `title` VARCHAR(50) NOT NULL , `description` VARCHAR(200) NOT NULL , `categoryid` INT(15) NOT NULL , `image` VARCHAR(50) NOT NULL , `price` FLOAT(10,2) NOT NULL , `productamount` INT(15) NOT NULL , PRIMARY KEY (`productid`)) ENGINE = InnoDB;
+
+//wscategory - Kategorie
+CREATE TABLE `webshop`.`wscategory` ( `categoryid` INT(15) NOT NULL AUTO_INCREMENT , `title` VARCHAR(50) NOT NULL , `description` VARCHAR(50) NULL , PRIMARY KEY (`categoryid`)) ENGINE = InnoDB;
+
+//wscart 
+CREATE TABLE `webshop`.`wscart` ( `idcart` INT(15) NOT NULL AUTO_INCREMENT , `iduser` INT(15) NOT NULL , `createdat` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`idcart`)) ENGINE = InnoDB;
+
+//wscartitem
+CREATE TABLE `webshop`.`wscartitem` ( `idcartitem` INT(25) NOT NULL AUTO_INCREMENT , `cartid` INT(25) NOT NULL , `productid` INT(15) NOT NULL , `amount` INT(15) NOT NULL , PRIMARY KEY (`idcartitem`)) ENGINE = InnoDB;
+
+//logindata
+CREATE TABLE `webshop`.`logindata` ( `iduser` INT(15) NOT NULL AUTO_INCREMENT , `logintime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `screenresolution` VARCHAR(15) NULL DEFAULT NULL , `operatingsystem` VARCHAR(50) NULL DEFAULT NULL , PRIMARY KEY (`iduser`)) ENGINE = InnoDB;

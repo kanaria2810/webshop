@@ -1,10 +1,11 @@
 <?php 
 
     session_start();
+    
     $sid = $_SESSION['id'];
     $shippingname = $_SESSION['firstname'].' '.$_SESSION['lastname'];
     $shippingemail = $_SESSION['username'];
-    $shippingadress = $_SESSION['address'];
+    $shippingaddress = $_SESSION['address'];
     $zip = $_SESSION['zip'];
     $city = $_SESSION['city'];
     try {
@@ -35,7 +36,7 @@
             $res = $conn -> query($sqlcartid);
             $idcart = $res -> fetchColumn();
             //erstell neuen order not closed
-            $sqlorder = "INSERT INTO webshop.wsorder (idorder,iduser,idcart,totalvalue,shippingmethod,shippingname,shippingemail,shippingaddress,zip,city,paymentmethod,paymentname,paymentnumber,placedtime,isclosed) VALUES ('', $sid, $idcart, 0, '', '$shippingname', '$shippingemail', '$shippingadress', '$zip', '$city', NULL, NULL, NULL, NULL, 0)";
+            $sqlorder = "INSERT INTO webshop.wsorder (idorder,iduser,idcart,totalvalue,shippingmethod,shippingname,shippingemail,shippingaddress,zip,city,paymentmethod,paymentname,paymentnumber,placedtime,isclosed) VALUES ('', $sid, $idcart, 0, '', '$shippingname', '$shippingemail', '$shippingaddress', '$zip', '$city', NULL, NULL, NULL, NULL, 0)";
             $conn -> query($sqlorder);
                 $_SESSION['idcart'] = $idcart;
 

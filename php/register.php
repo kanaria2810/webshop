@@ -100,7 +100,7 @@
     
     <?php
     $htmlconfirmmail = "<h2> Herzlich wilkommen zu Armbanduhr.de! </h2> <h4>Sehr geehrte Herr/Frau ".$sFirstname." ".$sLastname."</h4>".
-                        "<p>Sie haben sich für unser Armbanduhr.de registriert. Ihr Standardpassword ist ".$sLastname."!".substr($sUsername, 0, strpos($sUsername, '@'))."![Ihr-Email-Adresse-ohne-Domainname]</p>".
+                        "<p>Sie haben sich für unser Armbanduhr.de registriert. Ihr Standardpassword ist ".$sLastname."!".substr($sUsername, 0, strpos($sUsername, '@'))."</p>".
                         "<p>Mit freundlichen Gr&uuml;ßen, <br>".
                         "Ihr Armbanduhr Team </p>";
     ?>

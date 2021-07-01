@@ -33,7 +33,7 @@
         var elem = document.getElementById("warning");
           jQuery.ajax({
             type: 'POST',
-            url: 'php/checkusername.php',
+            url: 'php/phpfunction/checkusername.php',
             data: 'username='+ username,
             cache: false,
             success: function(response){

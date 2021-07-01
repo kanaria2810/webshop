@@ -5,9 +5,10 @@ session_start();
 
 $token = '';
 $emailaddress = '';
+$changeSuccess = false;
 
 //nicht login
-if ($_SESSION['active'] != 1) {
+if (!isset($_SESSION['active'])) {
 
   if (isset($_SESSION['token']) && isset($_SESSION['emailaddress'])) {
 
@@ -18,8 +19,9 @@ if ($_SESSION['active'] != 1) {
     if (isset($_POST['password'])) {
       $newpw = $_POST['password'];
     }
-
-    $changeSuccess = false;
+    echo $emailaddress;
+    echo $token;
+    
     //Verbindung zur Datenbank 
     try {
       //Datenbank settings
@@ -35,7 +37,7 @@ if ($_SESSION['active'] != 1) {
         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   
         //sql
-        $sql = "UPDATE webshop.wsuser SET password = '$newpw' WHERE username = $emailaddress AND token = $token";
+        $sql = "UPDATE webshop.wsuser SET password = '$newpw' WHERE username = '$emailaddress' AND token = '$token'";
         $conn->exec($sql);
         $changeSuccess = true;
         //Close connection
@@ -54,7 +56,6 @@ if ($_SESSION['active'] != 1) {
   if (isset($_POST['password'])) {
     $newpw = $_POST['password'];
   }
-  $changeSuccess = false;
   //Verbindung zur Datenbank 
   try {
     //Datenbank settings
@@ -84,7 +85,6 @@ if ($_SESSION['active'] != 1) {
         fclose ($handle);
     }
 
-
   }
 
 
@@ -99,23 +99,25 @@ if ($_SESSION['active'] != 1) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
+  <script src="../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
-  
+    
+  <?php
+    echo $changeSuccess;
+      if ($changeSuccess) {
+        echo '
+          <script> swal({
+              title: "OK!",
+              text: "Passwort erfolgreich ändern",
+              icon: "success",
+              button: "OK!",
+            }).then(function() {
+              window.location.href = "../overview.php";
+              });
+            </script>';
+      }
+  ?>
 </body>
 </html>
 
-<?php
-    if ($changeSuccess) {
-      echo '<script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
-        <script> swal({
-            title: "OK!",
-            text: "Passwort erfolgreich ändern",
-            icon: "success",
-            button: "OK!",
-          }).then(function() {
-            window.location = "../overview.php";
-            });
-          </script>';
-    }
-?>

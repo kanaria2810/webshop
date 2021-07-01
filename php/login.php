@@ -72,6 +72,9 @@
             $_SESSION['firstname'] = $row['firstname'];
             $_SESSION['lastname'] = $row['lastname'];
             $_SESSION['username'] = $row['username'];
+            $_SESSION['address'] = $row['address'];
+            $_SESSION['city'] = $row['city'];
+            $_SESSION['zip'] = $row['zip'];
             $_SESSION['active'] = 1;
             $_SESSION['lastlogin'] = $row['lastlogin'];
             $_SESSION['ispwreseted'] = $row['ispwreseted'];

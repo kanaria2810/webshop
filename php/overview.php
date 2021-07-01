@@ -2,10 +2,11 @@
 
 session_start();
 
+
 if ($_SESSION['active'] != 1) {
 
   //Sofort logout
-  header("Location: /startsite.php");
+  header("Location: startsite.php");
 
 }
 
@@ -78,7 +79,7 @@ if ($_SESSION['active'] != 1) {
 
         $(document).ready( () => {
             setInterval(() => {
-                $.get("php/checkcustomeronline.php",{}, function(data) {
+                $.get("phpfunction/checkcustomeronline.php",{}, function(data) {
                     var elem = document.getElementById("customernumber");
                         elem.textContent = data;
                     });

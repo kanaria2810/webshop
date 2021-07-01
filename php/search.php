@@ -6,9 +6,15 @@ $keyword = '';
 if (isset($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
 }
-$sid = '';
+
+
+$sid = 0;
 if (isset($_SESSION['id'])) {
     $sid = $_SESSION['id'];
+}
+$cid = 0;
+if (isset($_SESSION['idcart'])) {
+    $cid = $_SESSION['idcart'];
 }
 
 // echo $_SESSION['idcart'];
@@ -40,13 +46,15 @@ if (isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../css/overview.css">
     <link rel="stylesheet" href="../css/startsite.css">
 
-
     <script type="text/javascript">
+        function search() {
+            var searchvalue = document.getElementById('searchinput').value;
+            window.location.href = "search.php?keyword=" + searchvalue.trim();
+        }
 
         function addproduct(productid) {
             var sid = '<?php echo $sid ?>';
-            console.log(sid);
-                if (sid) {  
+                if (sid != 0) {  
                     var pid = productid;
                     var id = 'amountitem' + productid;
                     var amount = document.getElementById(id).value;
@@ -56,7 +64,7 @@ if (isset($_SESSION['id'])) {
                     data: {
                         amount_product: amount,
                         product_id: pid,
-                        cart_id: <?php echo $_SESSION['idcart'];?>,
+                        cart_id: <?php echo $cid;?>,
                     },
                     success: function(response){
                         if(response){
@@ -76,7 +84,6 @@ if (isset($_SESSION['id'])) {
                             });
                         }}
                     });
-
             } else {
                 swal({
                     title: "Fehler",
@@ -85,14 +92,7 @@ if (isset($_SESSION['id'])) {
                     button: "OK!",
                 });
             }
-            
         }
-
-        function search() {
-            var searchvalue = document.getElementById('searchinput').value;
-            window.location.href = "search.php?keyword=" + searchvalue.trim();
-        }
-
     </script>
 </head>
 <body>
