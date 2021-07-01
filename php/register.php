@@ -47,9 +47,9 @@
 
         //SQL
 
-            $sqlInsertUser = "INSERT INTO webshop.wsuser (id,username,firstname,lastname,password,address,city,zip,active,lastlogin,ispwreseted) VALUES (?,?,?,?,?,?,?,?,?,?,?) ";
+            $sqlInsertUser = "INSERT INTO webshop.wsuser (id,username,firstname,lastname,password,address,city,zip,active,lastlogin,ispwreseted,token) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ";
             $stmt = $conn->prepare($sqlInsertUser);
-            $stmt->execute(['',$sUsername,$sFirstname,$sLastname,$sPassword,$sAddress,$sCity,$sZip,$sActive,'',0]);
+            $stmt->execute(['',$sUsername,$sFirstname,$sLastname,$sPassword,$sAddress,$sCity,$sZip,$sActive,'',0,'']);
 
         //Close connection
             $conn = NULL;   

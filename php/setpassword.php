@@ -94,9 +94,15 @@ if (isset($_GET['token']) && isset($_GET['emailaddress'])) {
                 return true;
             }
             $('#setpw').submit(check);
-    }
+        }
 
-            </script>
+    
+        function search() {
+            var searchvalue = document.getElementById('searchinput').value;
+            window.location.href = "search.php?keyword=" + searchvalue.trim();
+        }
+
+    </script>
 </head>
 <body>
     <header>
@@ -107,8 +113,8 @@ if (isset($_GET['token']) && isset($_GET['emailaddress'])) {
             <div class="col-lg-7 col-md-8 col-sm-12">
                 <div class="d-flex justify-content-center">
                     <div class="searchbar">
-                      <input class="search_input" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
-                      <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                      <input class="search_input" id="searchinput" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
+                      <a href="javascript: search();" class="search_icon"><i class="fas fa-search"></i></a>
                     </div>
                 </div>
             </div>

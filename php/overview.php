@@ -71,6 +71,11 @@ if ($_SESSION['active'] != 1) {
 
         }
 
+        function search() {
+            var searchvalue = document.getElementById('searchinput').value;
+            window.location.href = "search.php?keyword=" + searchvalue.trim();
+        }
+
         $(document).ready( () => {
             setInterval(() => {
                 $.get("php/checkcustomeronline.php",{}, function(data) {
@@ -80,65 +85,6 @@ if ($_SESSION['active'] != 1) {
             }, 5000);
         });
 
-        function search() {
-            var inhaltobj = document.getElementById('searchinput');
-            var inhalt = inhaltobj.textContent;
-            console.log(inhalt);
-            var articleobj = document.getElementById('articles');
-            articleobj.innerHTML = '';
-            //Get product 
-            <?php
-            $innerhtml = '';
-            try {
-                //Datenbank settings
-                $datenbankname = "webshop";
-                $benutzername = "root";
-                $benutzerpassword = "";
-                $servername = "localhost";
-    
-                //Verbindung zur Datenbank
-                $conn = new PDO("mysql:host=$servername;dbname=$datenbankname", $benutzername, $benutzerpassword);
-    
-                //Set the PDO error node to exception
-                $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                $new_arr = explode(' ', $_GET['inhalt']);
-
-                foreach ($new_arr as $key) {
-                
-                    $sqlsearch = "SELECT * FROM webshop.wsproduct WHERE title LIKE '%".$_GET["inhalt"]."%' ";
-                    
-                    foreach ($conn -> query($sqlsearch) as $row) {
-                        $innerhtml .= '
-                                <div class="col-lg-3 col-sm-4 col-6 product-card">
-                                    <img src="../'.$row['image'].' " alt="female_watch1" class="img-thumbnail">
-                                    <hr>
-                                    <span class="product-card-title">'.$row['title'].'</span> <br>
-                                    <span class="product-card-description">'.$row['description'].'</span> <br>
-                                    <span class="product-card-description"> Noch '.$row['productamount'].' Stück</span> <br>
-                                    <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
-                                    <div class="row" style="margin-top: 5px; text-align:center; padding: 0px 50px 0px 50px" >
-                                        <input type="number" id="amountitem'.$row['productid'].'" value="1" style="margin-top: 10px;display: block; margin-right: auto; margin-left: auto;">
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-block in-den-warenkorb" style = "display: block; margin-right: auto; margin-left: auto;" onclick="addproduct('.$row['productid'].');">In den Einkaufswagen</button>
-                                    </div>
-                                </div>
-                            ';
-
-                    }
-                
-                    //Close connection
-                    $conn = NULL;   
-                } 
-            } catch (PDOException $th) {
-                $handle = fopen ("error_login.txt", "w");
-                fwrite ($handle, $th -> getMessage());
-                fclose ($handle);
-            }
-            ?>
-            articleobj.innerHTML = <?php echo $innerhtml ?>;
-        }
     </script>
 </head>
 <body>
@@ -237,8 +183,8 @@ if ($_SESSION['active'] != 1) {
                           Unsere Produkte
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <li><a class="dropdown-item" href="#">Damenuhren</a></li>
-                          <li><a class="dropdown-item" href="#">Herrenuhren</a></li>
+                          <li><a class="dropdown-item" href="search.php?keyword=Damenuhr">Damenuhren</a></li>
+                          <li><a class="dropdown-item" href="search.php?keyword=Herrenuhr">Herrenuhren</a></li>
                         </ul>
                       </li>
 

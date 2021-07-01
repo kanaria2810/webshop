@@ -1,10 +1,12 @@
 <?php
 
   session_start();
+    $sid = '';
 
-  $_SESSION = array();
+    if (isset($_SESSION['id'])) {
+        $sid = $_SESSION['id'];
+    }
 
-  $sid = $_SESSION['id'];
 
   try {
     //Datenbank settings
@@ -20,7 +22,7 @@
     $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //Set active = 0
-    $sql2 = "UPDATE webshop.wsuser SET active = '1' WHERE id = $sid";
+    $sql2 = "UPDATE webshop.wsuser SET active = '0' WHERE id = $sid";
     $conn->query($sql2);
 
     //Close connection
@@ -30,7 +32,7 @@
     fwrite ($handle, $th -> getMessage());
     fclose ($handle);
 }
-
+    $_SESSION = array();    
   
   if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
@@ -48,7 +50,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="10;url=../startsite.html" />
+    <meta http-equiv="refresh" content="10;url=startsite.php" />
     <title>ABC Logout</title>
     <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 

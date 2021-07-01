@@ -1,20 +1,26 @@
 <?php
+
 session_start();
 
-if (isset($_SESSION['active'])) {
-    if ($_SESSION['active'] == 1) {
-        header("Location: overview.php");
-    }
+$keyword = '';
+if (isset($_GET['keyword'])) {
+    $keyword = $_GET['keyword'];
 }
-?>
+$sid = '';
+if (isset($_SESSION['id'])) {
+    $sid = $_SESSION['id'];
+}
 
+// echo $_SESSION['idcart'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Armbanduhr.de  Ihre Armbanduhren</title>
+    <title>Armbanduhr.de  Ihre Webshopbeschreibungen</title>
     <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
 
@@ -28,62 +34,97 @@ if (isset($_SESSION['active'])) {
     <!--Font awesome-->
     <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
-    <!--Extra-->
-    <link rel="stylesheet" href="../css/startsite.css">
-
-    <!-- Sweetalert -->
     <script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
-        <script>
-            function login() {
-                swal({
-                    title: "Noch nicht zu kaufen",
-                    text: "Loggen Sie ein, um zahlreiche Produkte kaufen zu können",
-                    icon: "info",
-                    buttons: ["Abbrechen", "Zum Loginseite"],
-                }).then(function(isConfirm) {
-                    if (isConfirm) {
-                        window.location.href = "../login.html"
+    <!--Extra-->
+    <link rel="stylesheet" href="../css/overview.css">
+    <link rel="stylesheet" href="../css/startsite.css">
 
-                    }
+
+    <script type="text/javascript">
+
+        function addproduct(productid) {
+            var sid = '<?php echo $sid ?>';
+            console.log(sid);
+                if (sid) {  
+                    var pid = productid;
+                    var id = 'amountitem' + productid;
+                    var amount = document.getElementById(id).value;
+                    $.ajax({
+                    type: 'POST',
+                    url: 'phpfunction/addproduct.php',
+                    data: {
+                        amount_product: amount,
+                        product_id: pid,
+                        cart_id: <?php echo $_SESSION['idcart'];?>,
+                    },
+                    success: function(response){
+                        if(response){
+                            swal({
+                                title: "Eingefügt",
+                                text: amount + " Produkt(e) wird in den Warenkorb erfolgreich eingefügt!",
+                                icon: "success",
+                                button: "OK!",
+                            });
+
+                        } else {
+                            swal({
+                                title: "Fehler",
+                                text: "Produkt nicht verfügbar!",
+                                icon: "error",
+                                button: "OK!",
+                            });
+                        }}
                     });
+
+            } else {
+                swal({
+                    title: "Fehler",
+                    text: "Sie haben noch nicht eingelogt!",
+                    icon: "error",
+                    button: "OK!",
+                });
             }
+            
+        }
 
-            function search() {
-                var searchvalue = document.getElementById('searchinput').value;
-                window.location.href = "search.php?keyword=" + searchvalue.trim();
-            }
+        function search() {
+            var searchvalue = document.getElementById('searchinput').value;
+            window.location.href = "search.php?keyword=" + searchvalue.trim();
+        }
 
-            function more() {
-                swal('Funktion is der Zeit in der Entwicklungsphase');
-            }
-
-        </script>
-
+    </script>
 </head>
 <body>
     <header>
         <div class="row" id="navbar">
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.php'" style="cursor: pointer;">
-                <h2>Armbanduhr.de</h2>
+            <div class="row" id="help" style="align-self: flex-end;">
+                <p style="text-align: end;">
+
+                </p>
+
             </div>
-            <div class="col-lg-7 col-md-8 col-sm-12">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.php'" style="cursor: pointer;">
+                <h2 style="margin-bottom: 10px">Armbanduhr.de</h2>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12" style="margin-bottom: 10px;">
                 <div class="d-flex justify-content-center">
                     <div class="searchbar">
-                      <input class="search_input" id="searchinput" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
-                      <a href="javascript: search();" class="search_icon"><i class="fas fa-search"></i></a>
+                            <input class="search_input" id="searchinput" type="text" name="keywordinput" placeholder="Suche nach Uhren, Marken und mehr...">
+                            <a href="javascript: search();" class="search_icon"><i class="fas fa-search"></i></a>
                     </div>
                 </div>
+
             </div>
-            <div class="col-lg-3 col-md-12 col-sm-12" style="align-self: flex-end;">
-                <div class="row" id="help"><a href="#">Need help?</a></div>
-                <div class="row" id="log">
-                    <p> <button class="btn" onclick="window.location.href='../login.html'"><b>Anmelden</b></button>
-                        <button class="btn" onclick="window.location.href='../signup.html'"><b>Registrieren</b></button> </p>
+            <div class="col-lg-2 col-md-1 col-sm-12">
+                <div class = "row"  style="justify-content: flex-end; display: flex;">
                 </div>
+            </div>
+            <div>
             </div>
         </div>
     </header>
+    
     <section class="row" id="carousel">
         <div class="col-lg-1"></div>
         <div class="col-lg-10 col-md-12 banner-sec">
@@ -102,14 +143,14 @@ if (isset($_SESSION['active'])) {
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../image/Uhr2.jpg" class="d-block w-100" alt="...">
+                        <img src="../image/Uhr1.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Second slide label</h5>
                             <p>Some representative placeholder content for the second slide.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../image/Uhr1.jpg" class="d-block w-100" alt="...">
+                        <img src="../image/Uhr2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
                             <p>Some representative placeholder content for the third slide.</p>
@@ -133,24 +174,33 @@ if (isset($_SESSION['active'])) {
             <nav class="navbar bg-light justify-content-center">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Startseite</a>
+                        <a class="nav-link" href="startsite.php">Startseite</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shoppingcart.php">Warenkorb</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="orderhistory.php">Bestellungen</a>
                     </li>                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Uhren
+                          Unsere Produkte
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                           <li><a class="dropdown-item" href="#">Damenuhren</a></li>
                           <li><a class="dropdown-item" href="#">Herrenuhren</a></li>
                         </ul>
                       </li>
-                    <li class="nav-item">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Ihr Account
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="../login.html">Einloggen</a></li>
+                          <li><a class="dropdown-item" href="../signup.html">Registrieren</a></li>
+                            <li><a class="dropdown-item" href="../reset.html">Passwort vergessen</a></li>
+                        </ul>
+                      </li>
+                      <li class="nav-item">
                         <a class="nav-link" href="#">Über uns</a>
                     </li>
                 </ul>
@@ -158,8 +208,8 @@ if (isset($_SESSION['active'])) {
               </nav>
         </div>
         <div class="col-lg-8 col-sm-12">
-            <div class="row">
-            <?php
+            <div class="row" id="articles">
+                <?php
                     try {
                       //Datenbank settings
                         $datenbankname = "webshop";
@@ -172,20 +222,35 @@ if (isset($_SESSION['active'])) {
           
                         //Set the PDO error node to exception
                         $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                        $new_arr = explode(' ', $keyword);
           
-                        $sql = "SELECT * FROM webshop.wsproduct";
-                        foreach ($conn -> query($sql) as $row) {
-                          echo '
-                            <div class="col-lg-3 col-sm-4 col-6 product-card">
-                            <img src="../'.$row['image'].' " alt="female_watch1" class="img-thumbnail">
-                            <hr>
-                            <span class="product-card-title">'.$row['title'].'</span> <br>
-                            <span class="product-card-description">'.$row['description'].'</span> <br>
-                            <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
-                            <div class="row" style="margin: 5px" >
-                                <button class="btn btn-block in-den-warenkorb" onclick="login();">In den Einkaufswagen</button>
-                            </div>
-                        </div>';
+                        foreach ($new_arr as $key => $value) {
+
+                            $keyword = trim($value);
+                
+                            $sqlsearch = "SELECT * FROM webshop.wsproduct WHERE description LIKE '%".$keyword."%' ";
+                            
+                            foreach ($conn -> query($sqlsearch) as $row) {
+                                echo '
+                                    <div class="col-lg-3 col-sm-4 col-6 product-card">
+                                        <img src="../'.$row['image'].' " alt="female_watch1" class="img-thumbnail">
+                                        <hr>
+                                        <span class="product-card-title">'.$row['title'].'</span> <br>
+                                        <span class="product-card-description">'.$row['description'].'</span> <br>
+                                        <span class="product-card-description"> Noch '.$row['productamount'].' Stück</span> <br>
+                                        <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
+                                        <div class="row" style="margin-top: 5px; text-align:center; padding: 0px 50px 0px 50px" >
+                                            <input type="number" id="amountitem'.$row['productid'].'" value="1" style="margin-top: 10px;display: block; margin-right: auto; margin-left: auto;">
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-block in-den-warenkorb" style = "display: block; margin-right: auto; margin-left: auto;" onclick="addproduct('.$row['productid'].');">In den Einkaufswagen</button>
+                                        </div>
+                                    </div>
+                                ';
+        
+                            }
+                        
                         }
                         //Close connection
                         $conn = NULL;   
@@ -201,7 +266,7 @@ if (isset($_SESSION['active'])) {
 
             </div>
             <div class="d-grid" id="more">
-                <button class="btn  btn-primary btn-block" onclick="more();">More</button>
+                <button class="btn  btn-primary btn-block">More</button>
             </div>
         </div>
     </section>

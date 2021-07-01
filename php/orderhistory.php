@@ -62,6 +62,11 @@
             }
         }
 
+        function search() {
+            var searchvalue = document.getElementById('searchinput').value;
+            window.location.href = "search.php?keyword=" + searchvalue.trim();
+        }
+
         function rebuy(idorder) {
             var ido = idorder;
             //Bestellung nochmals kaufen
@@ -128,6 +133,11 @@
                 swal('Funktion ist der Zeit in der Entwicklungsphase')
             }
 
+    
+    
+    
+    
+    
     </script>
 </head>
 <body>
@@ -139,8 +149,8 @@
             <div class="col-lg-7 col-md-8 col-sm-12">
                 <div class="d-flex justify-content-center">
                     <div class="searchbar">
-                      <input class="search_input" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
-                      <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                      <input class="search_input" id="searchinput" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
+                      <a href="javascript: search();" class="search_icon"><i class="fas fa-search"></i></a>
                     </div>
                 </div>
             </div>

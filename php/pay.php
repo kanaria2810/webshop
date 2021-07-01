@@ -42,7 +42,11 @@ $cid = $_SESSION['idcart'];
     <link rel="stylesheet" href="../css/pay.css">
     
     <script type="text/javascript">
-
+  
+      function search() {
+            var searchvalue = document.getElementById('searchinput').value;
+            window.location.href = "search.php?keyword=" + searchvalue.trim();
+        }
     </script>
 </head>
 <body>
@@ -54,8 +58,8 @@ $cid = $_SESSION['idcart'];
             <div class="col-lg-7 col-md-8 col-sm-12">
                 <div class="d-flex justify-content-center">
                     <div class="searchbar">
-                      <input class="search_input" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
-                      <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                      <input id="searchinput" class="search_input" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
+                      <a href="javascript: search();" class="search_icon"><i class="fas fa-search"></i></a>
                     </div>
                 </div>
             </div>
