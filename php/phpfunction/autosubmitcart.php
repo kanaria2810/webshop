@@ -6,7 +6,7 @@
     if ($_SESSION['active'] != 1) {
     
         //Sofort logout
-        header("Location: /startsite.php");
+        header("Location: ../startsite.php");
     
     }
     $sid = $_SESSION['id'];

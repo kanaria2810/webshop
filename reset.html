@@ -19,6 +19,9 @@
     <!--Font awesome-->
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
 
+    <script src="node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    
+
     <!--Extra-->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/startsite.css">
@@ -26,19 +29,13 @@
 <body >
     <header>
         <div class="row" id="navbar">
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.html'" style="cursor: pointer;">
+            <div class="col-lg-6 col-md-6 col-sm-6 justify-content-center" onclick="window.location.href = 'php/startsite.php'" style="cursor: pointer;">
                 <h2>Armbanduhr.de</h2>
             </div>
-            <div class="col-lg-7 col-md-8 col-sm-12">
-                <div class="d-flex justify-content-center">
-                    <div class="searchbar">
-                      <input class="search_input" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
-                      <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-12 col-sm-12" style="align-self: flex-end;">
-                <div class="row" id="help"><a href="help.html">Need help?</a></div>
+
+            
+            <div class="col-lg-6 col-md-6 col-sm-6" style="align-self: flex-end;">
+                <div class="row" id="help"><a href="#">Need help?</a></div>
                 <div class="row" id="log">
                     <p> <button class="btn" onclick="window.location.href='login.html'"><b>Anmelden</b></button>
                         <button class="btn" onclick="window.location.href='signup.html'"><b>Registrieren</b></button> </p>
@@ -52,19 +49,19 @@
                 <div class="col-lg-3"></div>
                 <div class="row col-lg-6" style="padding: 20px;">
                     <h5 style="margin-bottom: 40px;">Password zurücksetzen</h5>
-                    <form class=" form-control form-control-lg align-items-center row-cols-lg-auto col-sm-7">
+                    <form class=" form-control form-control-lg align-items-center row-cols-lg-auto col-sm-7" method="POST" action="php/phpmailer/sendmailwithtoken.php">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Ihre Email eingeben:</label>
                             <div class="input-group mt-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text br-50" style="height: 50px"><i class="fas fa-at"></i></span>
                                 </div>
-                                <input type="text" placeholder="max.mustermann@gmail.com" class="form-control"/>
+                                <input type="text" placeholder="max.mustermann@gmail.com" class="form-control" name="email"/>
                             </div>
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary btn-reset" type="button" >Submit</button>
-                        </div>
+                        </div> 
                     </form>
                 </div>
                 <div class="col-lg-3"></div>

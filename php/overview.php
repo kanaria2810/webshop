@@ -18,8 +18,8 @@ if ($_SESSION['active'] != 1) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABC.de  Ihre Webshopbeschreibungen</title>
-    <link rel="shortcut icon" type="image/png" href="/image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
+    <title>Armbanduhr.de  Ihre Webshopbeschreibungen</title>
+    <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
 
     <!--Jquery-->
@@ -44,7 +44,7 @@ if ($_SESSION['active'] != 1) {
             var amount = document.getElementById(id).value;
             $.ajax({
             type: 'POST',
-            url: 'addproduct.php',
+            url: 'phpfunction/addproduct.php',
             data: {
                 amount_product: amount,
                 product_id: pid,
@@ -73,13 +73,72 @@ if ($_SESSION['active'] != 1) {
 
         $(document).ready( () => {
             setInterval(() => {
-                $.get("checkcustomeronline.php",{}, function(data) {
+                $.get("php/checkcustomeronline.php",{}, function(data) {
                     var elem = document.getElementById("customernumber");
                         elem.textContent = data;
                     });
-            }, 60000);
+            }, 5000);
         });
 
+        function search() {
+            var inhaltobj = document.getElementById('searchinput');
+            var inhalt = inhaltobj.textContent;
+            console.log(inhalt);
+            var articleobj = document.getElementById('articles');
+            articleobj.innerHTML = '';
+            //Get product 
+            <?php
+            $innerhtml = '';
+            try {
+                //Datenbank settings
+                $datenbankname = "webshop";
+                $benutzername = "root";
+                $benutzerpassword = "";
+                $servername = "localhost";
+    
+                //Verbindung zur Datenbank
+                $conn = new PDO("mysql:host=$servername;dbname=$datenbankname", $benutzername, $benutzerpassword);
+    
+                //Set the PDO error node to exception
+                $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $new_arr = explode(' ', $_GET['inhalt']);
+
+                foreach ($new_arr as $key) {
+                
+                    $sqlsearch = "SELECT * FROM webshop.wsproduct WHERE title LIKE '%".$_GET["inhalt"]."%' ";
+                    
+                    foreach ($conn -> query($sqlsearch) as $row) {
+                        $innerhtml .= '
+                                <div class="col-lg-3 col-sm-4 col-6 product-card">
+                                    <img src="../'.$row['image'].' " alt="female_watch1" class="img-thumbnail">
+                                    <hr>
+                                    <span class="product-card-title">'.$row['title'].'</span> <br>
+                                    <span class="product-card-description">'.$row['description'].'</span> <br>
+                                    <span class="product-card-description"> Noch '.$row['productamount'].' Stück</span> <br>
+                                    <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
+                                    <div class="row" style="margin-top: 5px; text-align:center; padding: 0px 50px 0px 50px" >
+                                        <input type="number" id="amountitem'.$row['productid'].'" value="1" style="margin-top: 10px;display: block; margin-right: auto; margin-left: auto;">
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-block in-den-warenkorb" style = "display: block; margin-right: auto; margin-left: auto;" onclick="addproduct('.$row['productid'].');">In den Einkaufswagen</button>
+                                    </div>
+                                </div>
+                            ';
+
+                    }
+                
+                    //Close connection
+                    $conn = NULL;   
+                } 
+            } catch (PDOException $th) {
+                $handle = fopen ("error_login.txt", "w");
+                fwrite ($handle, $th -> getMessage());
+                fclose ($handle);
+            }
+            ?>
+            articleobj.innerHTML = <?php echo $innerhtml ?>;
+        }
     </script>
 </head>
 <body>
@@ -93,21 +152,21 @@ if ($_SESSION['active'] != 1) {
                 </p>
 
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'o'" style="cursor: pointer;">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = '#'" style="cursor: pointer;">
                 <h2 style="margin-bottom: 10px">Armbanduhr.de</h2>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12" style="margin-bottom: 10px;">
                 <div class="d-flex justify-content-center">
                     <div class="searchbar">
-                      <input class="search_input" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
-                      <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                      <input class="search_input" id="searchinput" type="text" name="" placeholder="Suche nach Uhren, Marken und mehr...">
+                      <a href="javascript: search();" class="search_icon"><i class="fas fa-search"></i></a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-2 col-md-1 col-sm-12">
                 <div class = "row"  style="justify-content: flex-end; display: flex;">
                     <button style="background-color: #e7cd3c; color: #000; height: 60px; width:60px; margin-right: 20px;" class="btn" onclick="window.location.href='shoppingcart.php'"><i class="fas fa-shopping-cart"></i></button>            
-                    <button style="background-color: #e7cd3c; color: #000; height: 60px; width:60px; margin-right: 50px" id="log" class="btn" onclick="window.location.href='../orderhistory.html'"><i class="fas fa-history"></i></button>
+                    <button style="background-color: #e7cd3c; color: #000; height: 60px; width:60px; margin-right: 50px" id="log" class="btn" onclick="window.location.href='orderhistory.php'"><i class="fas fa-history"></i></button>
                 </div>
             </div>
             <div>
@@ -134,14 +193,14 @@ if ($_SESSION['active'] != 1) {
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../image/Uhr2.jpg" class="d-block w-100" alt="...">
+                        <img src="../image/Uhr1.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Second slide label</h5>
                             <p>Some representative placeholder content for the second slide.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../image/Uhr1.jpg" class="d-block w-100" alt="...">
+                        <img src="../image/Uhr2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
                             <p>Some representative placeholder content for the third slide.</p>
@@ -165,13 +224,13 @@ if ($_SESSION['active'] != 1) {
             <nav class="navbar bg-light justify-content-center">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../startsite.html">Startseite</a>
+                        <a class="nav-link" href="#">Startseite</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Warenkorb</a>
+                        <a class="nav-link" href="shoppingcart.php">Warenkorb</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Bestellungen</a>
+                        <a class="nav-link" href="orderhistory.php">Bestellungen</a>
                     </li>                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -199,7 +258,7 @@ if ($_SESSION['active'] != 1) {
               </nav>
         </div>
         <div class="col-lg-8 col-sm-12">
-            <div class="row">
+            <div class="row" id="articles">
                 <?php
                     try {
                       //Datenbank settings

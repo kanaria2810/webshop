@@ -4,6 +4,33 @@
 
   $_SESSION = array();
 
+  $sid = $_SESSION['id'];
+
+  try {
+    //Datenbank settings
+    $datenbankname = "webshop";
+    $benutzername = "root";
+    $benutzerpassword = "";
+    $servername = "localhost";
+
+  //Verbindung zur Datenbank
+    $conn = new PDO("mysql:host=$servername;dbname = $datenbankname", $benutzername, $benutzerpassword);
+
+    //Set the PDO error node to exception
+    $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    //Set active = 0
+    $sql2 = "UPDATE webshop.wsuser SET active = '1' WHERE id = $sid";
+    $conn->query($sql2);
+
+    //Close connection
+    $conn = NULL;
+} catch (PDOException $th) {
+    $handle = fopen ("error_login.txt", "w");
+    fwrite ($handle, $th -> getMessage());
+    fclose ($handle);
+}
+
   
   if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
@@ -21,26 +48,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="10;url=../startsite.html" />
     <title>ABC Logout</title>
-    <link rel="shortcut icon" type="image/png" href="/image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
+    <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
     <!--Jquery-->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 
     <!--Bootstrap-->
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!--Font awesome-->
-    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
     <!--Extra-->
-    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="../css/reset.css">
 </head>
 <body>
     <div class="page-header">
-        <a href="help.html" class="nav justify-content-end" style="margin: 10px 30px 0px 30px;">Need help?</a>
-        <div class="row col col-sm-10" style="padding-left: 50px; cursor: pointer;" onclick="window.location.href = 'startsite.html'">
+        <a href="#" class="nav justify-content-end" style="margin: 10px 30px 0px 30px;">Need help?</a>
+        <div class="row col col-sm-10" style="padding-left: 50px; cursor: pointer;" onclick="window.location.href = 'startsite.php'">
             <h4>Armbanduhr.de</h4>
         </div>
     </div>

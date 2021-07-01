@@ -54,7 +54,7 @@ $cid = $_SESSION['idcart'];
             }
             $.ajax({
             type: 'POST',
-            url: 'addproduct.php',
+            url: 'phpfunction/addproduct.php',
             data: {
                 product_id: pid,
                 cart_id: <?php echo $_SESSION['idcart']; ?>,
@@ -101,11 +101,11 @@ $cid = $_SESSION['idcart'];
             <div class="col-lg-3 col-md-12 col-sm-12" style="align-self: flex-end;">
                 <div class="row">
                     <div class="col"></div>
-                    <div class="col" id="help"><a href="help.html" style="font-size: medium;">Need help?</a></div>
-                    <div class="col"><a href="logout.html" style="font-size: medium;">Ausloggen</a></div>
+                    <div class="col" id="help"><a href="#" style="font-size: medium;">Need help?</a></div>
+                    <div class="col"><a href="logout.php" style="font-size: medium;">Ausloggen</a></div>
                 </div>
                 <div class="row" id="log">
-                    <p> <button class="btn" onclick="window.location.href='#'"><b>Warenkorb</b></button>
+                    <p> <button class="btn" onclick="window.location.href='shoppingcart.php'"><b>Warenkorb</b></button>
                         <button class="btn" onclick="window.location.href='orderhistory.php'"><b>Bestellungen</b></button> </p>
                 </div>
             </div>
@@ -138,81 +138,81 @@ $cid = $_SESSION['idcart'];
                             </div>
 
                     </div>
-                    <?php
-                        try {
-                            //Anzahlprodukte
-                            $numberitem = 0;
-                            //Gesambetrag
-                            $total = 0;
-                            //Mengenrabatt
-                            $rabattrate = 0.15;
-                            $totalrabatt = 0;
-                            //Datenbank settings
-                            $datenbankname = "webshop";
-                            $benutzername = "root";
-                            $benutzerpassword = "";
-                            $servername = "localhost";
+            <?php
+                try {
+                    //Anzahlprodukte
+                    $numberitem = 0;
+                    //Gesambetrag
+                    $total = 0;
+                    //Mengenrabatt
+                    $rabattrate = 0.15;
+                    $totalrabatt = 0;
+                    //Datenbank settings
+                    $datenbankname = "webshop";
+                    $benutzername = "root";
+                    $benutzerpassword = "";
+                    $servername = "localhost";
 
-                            //Verbindung zur Datenbank
-                            $conn = new PDO("mysql:host=$servername;dbname=$datenbankname", $benutzername, $benutzerpassword);
+                    //Verbindung zur Datenbank
+                    $conn = new PDO("mysql:host=$servername;dbname=$datenbankname", $benutzername, $benutzerpassword);
 
-                            //Chọn các cart item mà có có cartid trùng
-                            $sql = "SELECT * FROM webshop.wscartitem WHERE cartid= '$cid' ORDER BY productid";
-                            $csql = $conn -> query($sql);
+                    //Chọn các cart item mà có có cartid trùng
+                    $sql = "SELECT * FROM webshop.wscartitem WHERE cartid= '$cid' ORDER BY productid";
+                    $csql = $conn -> query($sql);
 
-                            foreach($csql as $row){
-                                $pamount = $row['amount'];
-                                $productid = $row['productid'];
-                                
-                                $sql2 = "SELECT * FROM webshop.wsproduct WHERE productid= '$productid' ";
-                                $csql2 = $conn -> query($sql2);
-                                foreach ($csql2 as $row2) {
-                                    $producttitle = $row2['title'];
-                                    $productprice = $row2['price'];
-                                    $total += $pamount * $productprice;
-                                    $numberitem += $pamount;
-                                    if ($pamount>=10) {
-                                        $totalrabatt += $rabattrate * $pamount * $productprice;
-                                    }
-                                    $productimage = $row2['image'];
-                                    $productcategoryid = $row2['categoryid'];
-                                    $sql3 = "SELECT * FROM webshop.wscategory WHERE categoryid= '$productcategoryid'";
-                                    $csql3 = $conn -> query($sql3);
-                                    foreach ($csql3 as $row3) {
-                                        $categorytitle = $row3['title'];
-                                        echo '
-                                        <div class="row main align-items-center">
-                                        <div class="col-2"><img class="img-fluid" src="../'.$row2['image'].'"></div>
-                                        <div class="col">
-                                            <div class="row text-muted">'.$categorytitle.'</div>
-                                            <div class="row"><b>'.$producttitle.'</b></div>
-                                        </div>
-                                        <div class="col-2"><a href="javascript:addproduct(0,'.$productid.');">&minus;</a>
-                                                <button type="text" class="btn" id="amount'.$productid.'" style = "padding: none; margin:none; width: 60px; height: 40px">'.$pamount.'</button>
-                                                <a href="javascript:addproduct(1,'.$productid.');">+</a></div>
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col" id="price">'.$productprice.' &euro;/Stück</div>
-                                                <div class="col">'.$productprice*$pamount.' &euro;</div>
-                                                <div class="col"><a href="deleteproduct.php?pid='.$productid.'&cid='.$_SESSION['idcart'].'" class="close"><i class="fas fa-trash"></i></a></div>
-                                            </div>
-            
-                                        </div>
-            
-                                    </div>';
-                                    }
-                                }
+                    foreach($csql as $row){
+                        $pamount = $row['amount'];
+                        $productid = $row['productid'];
+                        
+                        $sql2 = "SELECT * FROM webshop.wsproduct WHERE productid= '$productid' ";
+                        $csql2 = $conn -> query($sql2);
+                        foreach ($csql2 as $row2) {
+                            $producttitle = $row2['title'];
+                            $productprice = $row2['price'];
+                            $total += $pamount * $productprice;
+                            $numberitem += $pamount;
+                            if ($pamount>=10) {
+                                $totalrabatt += $rabattrate * $pamount * $productprice;
                             }
+                            $productimage = $row2['image'];
+                            $productcategoryid = $row2['categoryid'];
+                            $sql3 = "SELECT * FROM webshop.wscategory WHERE categoryid= '$productcategoryid'";
+                            $csql3 = $conn -> query($sql3);
+                            foreach ($csql3 as $row3) {
+                                $categorytitle = $row3['title'];
+                                echo '
+                                <div class="row main align-items-center">
+                                <div class="col-2"><img class="img-fluid" src="../'.$row2['image'].'"></div>
+                                <div class="col">
+                                    <div class="row text-muted">'.$categorytitle.'</div>
+                                    <div class="row"><b>'.$producttitle.'</b></div>
+                                </div>
+                                <div class="col-2"><a href="javascript:addproduct(0,'.$productid.');">&minus;</a>
+                                        <button type="text" class="btn" id="amount'.$productid.'" style = "padding: none; margin:none; width: 60px; height: 40px">'.$pamount.'</button>
+                                        <a href="javascript:addproduct(1,'.$productid.');">+</a></div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col" id="price">'.$productprice.' &euro;/Stück</div>
+                                        <div class="col">'.$productprice*$pamount.' &euro;</div>
+                                        <div class="col"><a href="deleteproduct.php?pid='.$productid.'&cid='.$_SESSION['idcart'].'" class="close"><i class="fas fa-trash"></i></a></div>
+                                    </div>
+    
+                                </div>
+    
+                            </div>';
+                            }
+                        }
+                    }
 
 
-                            //Set the PDO error node to exception
-                            $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            //Close connection
-                            $conn = NULL;   
-                        } catch (PDOException $th) {
-                            echo $th -> getMessage();
-                        } 
-                    ?>
+                    //Set the PDO error node to exception
+                    $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    //Close connection
+                    $conn = NULL;   
+                } catch (PDOException $th) {
+                    echo $th -> getMessage();
+                } 
+            ?>
                         
 
                 </div>
@@ -259,7 +259,7 @@ $cid = $_SESSION['idcart'];
                                 'use strict'
                                 $.ajax({
                                     type: 'POST',
-                                    url: 'checkproductavailable.php',
+                                    url: 'phpfunction/checkproductavailable.php',
                                     data: {
                                         cart_id: <?php echo $_SESSION['idcart']; ?>
                                     },

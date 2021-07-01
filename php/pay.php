@@ -25,7 +25,7 @@ $cid = $_SESSION['idcart'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABC.de Einkauf bestätigen</title>
-    <link rel="shortcut icon" type="image/png" href="/image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
+    <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
     <!--Jquery-->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -48,7 +48,7 @@ $cid = $_SESSION['idcart'];
 <body>
     <header>
         <div class="row" id="navbar">
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = '../startsite.html'" style="cursor: pointer;">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.php'" style="cursor: pointer;">
                 <h2>Armbanduhr.de</h2>
             </div>
             <div class="col-lg-7 col-md-8 col-sm-12">
@@ -177,7 +177,7 @@ $cid = $_SESSION['idcart'];
           </div>
           <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Rechnungsadresse</h4>
-            <form class="needs-validation" method="POST" action="checkout.php">
+            <form class="needs-validation" method="POST" action="phpfunction/checkout.php">
               <div class="row g-3">
                 <div class="col-sm-12">
                   <label for="firstName" class="form-label">Name</label>
@@ -213,7 +213,7 @@ $cid = $_SESSION['idcart'];
                 </div>    
                 <div class="col-md-9">
                   <label for="address" class="form-label">Stadt</label>
-                  <input type="text" name="address" class="form-control" id="address" city="<?php echo $city ?>" required>
+                  <input type="text" name="city" class="form-control" id="address" value="<?php echo $city ?>" required>
                   <div class="invalid-feedback">
                     Bitte Ihre Stadt eingeben.
                   </div>

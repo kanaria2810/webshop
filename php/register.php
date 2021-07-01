@@ -65,9 +65,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="30;url=../startsite.html" />
+    <meta http-equiv="refresh" content="30;url=startsite.php" />
     <title>Registrierungsbestätigung</title>
-    <link rel="shortcut icon" type="image/png" href="..//image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
+    <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
     <!--Jquery-->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
@@ -89,7 +89,7 @@
     function countdown() {
         var i = document.getElementById('counter');
         if (parseInt(i.innerHTML)<=0) {
-            location.href = 'login.php';
+            location.href = '../login.html';
         }
         if (parseInt(i.innerHTML)!=0) {
             i.innerHTML = parseInt(i.innerHTML)-1;
@@ -170,6 +170,3 @@
 </body>
 </html>
 
-<?php
-    //PHP Mailer
-?>

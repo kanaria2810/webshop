@@ -14,7 +14,7 @@ if (isset($_SESSION['active'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABC.de  Ihre Webshopbeschreibungen</title>
+    <title>Armbanduhr.de  Ihre Armbanduhren</title>
     <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
 
@@ -71,7 +71,7 @@ if (isset($_SESSION['active'])) {
                 </div>
             </div>
             <div class="col-lg-3 col-md-12 col-sm-12" style="align-self: flex-end;">
-                <div class="row" id="help"><a href="help.html">Need help?</a></div>
+                <div class="row" id="help"><a href="#">Need help?</a></div>
                 <div class="row" id="log">
                     <p> <button class="btn" onclick="window.location.href='../login.html'"><b>Anmelden</b></button>
                         <button class="btn" onclick="window.location.href='../signup.html'"><b>Registrieren</b></button> </p>
@@ -131,10 +131,10 @@ if (isset($_SESSION['active'])) {
                         <a class="nav-link" href="#">Startseite</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../shoppingcart.html">Warenkorb</a>
+                        <a class="nav-link" href="shoppingcart.php">Warenkorb</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../orderhistory.html">Bestellungen</a>
+                        <a class="nav-link" href="orderhistory.php">Bestellungen</a>
                     </li>                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

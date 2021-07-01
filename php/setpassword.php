@@ -1,12 +1,26 @@
 <?php
 
+$token = '';
+$emailaddress = '';
+
 session_start();
 
-if ($_SESSION['active'] != 1) {
+if (isset($_GET['token']) && isset($_GET['emailaddress'])) {
 
-  //Sofort logout
-  header("Location: ../login.html");
+    $token = $_GET['token'];
+    $_SESSION['token'] = $token;
+    $emailaddress = $_GET['emailaddress'];
+    $_SESSION['emailaddress'] = $emailaddress;
+
+} else {
+
+    if ($_SESSION['active'] != 1) {
+
+    //Sofort logout
+    header("Location: ../login.html");
+    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +101,7 @@ if ($_SESSION['active'] != 1) {
 <body>
     <header>
         <div class="row" id="navbar">
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = '../startsite.html'" style="cursor: pointer;">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.php'" style="cursor: pointer;">
                 <h2>Armbanduhr.de</h2>
             </div>
             <div class="col-lg-7 col-md-8 col-sm-12">
@@ -99,7 +113,7 @@ if ($_SESSION['active'] != 1) {
                 </div>
             </div>
             <div class="col-lg-3 col-md-12 col-sm-12" style="align-self: flex-end;">
-                <div class="row" id="help"><a href="help.html">Need help?</a></div>
+                <div class="row" id="help"><a href="#">Need help?</a></div>
                 <div class="row" id="log">
                     <p> <button class="btn" onclick="window.location.href='../login.html'"><b>Anmelden</b></button>
                         <button class="btn" onclick="window.location.href='../signup.html'"><b>Registrieren</b></button> </p>
@@ -114,7 +128,7 @@ if ($_SESSION['active'] != 1) {
                     <h4>Password zurücksetzen:</h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" class="needs-validation" name = "setpw" id = "setpw" action = "savepassword.php">
+                    <form method="POST" class="needs-validation" name = "setpw" id = "setpw" action = "phpfunction/savepassword.php">
                         <div id="dynamic_container">
                             <div class="input-group">
                                 <div class="input-group-prepend">

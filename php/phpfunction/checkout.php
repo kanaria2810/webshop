@@ -5,7 +5,7 @@
         if ($_SESSION['active'] != 1) {
         
           //Sofort logout
-          header("Location: /startsite.php");
+          header("Location: ../startsite.php");
         
         }
         $sUsername = $_SESSION['username'];
@@ -144,22 +144,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content=" initial-scale=1.0">
     <title>Bestätigen...</title>
-    <link rel="shortcut icon" type="image/png" href="../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
+    <link rel="shortcut icon" type="image/png" href="../../image/png-clipart-clock-clock-cartoon-thumbnail.ico"/>
 
     <!--Jquery-->
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 
     <!--Bootstrap-->
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!--Font awesome-->
-    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
 
     <!--Extra-->
-    <link rel="stylesheet" href="../css/startsite.css">
+    <link rel="stylesheet" href="../../css/startsite.css">
 
-    <script src="../node_modules/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../../node_modules/sweetalert/dist/sweetalert.min.js"></script>
 
 
     <script>
@@ -183,7 +183,7 @@
 
         $.ajax({
             type: 'POST',
-            url: 'phpmailer/sendmail.php',
+            url: '../phpmailer/sendmail.php',
             data: {
                 email_address : '<?php echo $sUsername; ?>',
                 name_address : "<?php echo $sFirstname.' '.$sLastname ?>",

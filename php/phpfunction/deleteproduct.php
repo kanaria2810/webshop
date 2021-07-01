@@ -35,6 +35,6 @@
         fwrite ($handle, $th -> getMessage());
         fclose ($handle);
     }
-    header("Location: shoppingcart.php");
+    header("Location: ../shoppingcart.php");
     
 ?>

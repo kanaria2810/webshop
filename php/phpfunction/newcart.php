@@ -53,6 +53,6 @@
     } catch (PDOException $th) {
         echo $th -> getMessage();
     }
-    header('Location: overview.php');
+    header('Location: ../overview.php');
 
 ?>

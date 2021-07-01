@@ -78,7 +78,7 @@
                         //new Warenkorb und submitt cart
                         $.ajax({
                             type: 'POST',
-                            url: 'autosubmitcart.php',
+                            url: 'phpfunction/autosubmitcart.php',
                             data: {
                                 user_id: <?php echo $_SESSION['id'] ?>,
                                 order_id: ido
@@ -133,7 +133,7 @@
 <body>
     <header>
         <div class="row" id="navbar">
-            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.html'" style="cursor: pointer;">
+            <div class="col-lg-2 col-md-3 col-sm-12 justify-content-center" onclick="window.location.href = 'startsite.php'" style="cursor: pointer;">
                 <h2>Armbanduhr.de</h2>
             </div>
             <div class="col-lg-7 col-md-8 col-sm-12">
@@ -145,9 +145,9 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-12 col-sm-12" style="align-self: flex-end;">
-                <div class="row" id="help"><a href="help.html">Need help?</a></div>
+                <div class="row" id="help"><a href="#">Need help?</a></div>
                 <div class="row" id="log">
-                    <p> <button class="btn" onclick="window.location.href='shoppingcart.html'"><b>Warenkorb</b></button>
+                    <p> <button class="btn" onclick="window.location.href='shoppingcart.php'"><b>Warenkorb</b></button>
                         <button class="btn" onclick="window.location.href='#'"><b>Bestellungen</b></button> </p>
                 </div>
             </div>
