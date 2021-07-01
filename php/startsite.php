@@ -97,22 +97,22 @@ if (isset($_SESSION['active'])) {
                     <div class="carousel-item active">
                         <img src="../image/Uhr2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
+                            <h5></h5>
+                            <p></p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="../image/Uhr2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
+                            <h5></h5>
+                            <p></p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="../image/Uhr1.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
+                            <h5></h5>
+                            <p></p>
                         </div>
                     </div>
                 </div>
@@ -136,10 +136,10 @@ if (isset($_SESSION['active'])) {
                         <a class="nav-link" href="#">Startseite</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="shoppingcart.php">Warenkorb</a>
+                        <a class="nav-link" href="../login.html">Einloggen</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="orderhistory.php">Bestellungen</a>
+                        <a class="nav-link" href="../signup.html">Registrieren</a>
                     </li>                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -181,6 +181,7 @@ if (isset($_SESSION['active'])) {
                             <hr>
                             <span class="product-card-title">'.$row['title'].'</span> <br>
                             <span class="product-card-description">'.$row['description'].'</span> <br>
+                            <span class="product-card-description"> Noch '.$row['productamount'].' Stück</span> <br>
                             <span class="product-card-price"><b>'.$row['price'].' &euro;</b></span> 
                             <div class="row" style="margin: 5px" >
                                 <button class="btn btn-block in-den-warenkorb" onclick="login();">In den Einkaufswagen</button>
