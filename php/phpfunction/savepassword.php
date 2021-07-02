@@ -89,9 +89,6 @@ if (!isset($_SESSION['active'])) {
 
   }
 
-
-
-
 ?>
 
 <!DOCTYPE html>
