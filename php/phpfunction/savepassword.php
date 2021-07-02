@@ -39,6 +39,8 @@ if (!isset($_SESSION['active'])) {
         //sql
         $sql = "UPDATE webshop.wsuser SET password = '$newpw' WHERE username = '$emailaddress' AND token = '$token'";
         $conn->exec($sql);
+        $sql = "UPDATE webshop.wsuser SET token = '' WHERE username = '$emailaddress'";
+        $conn -> execc($sql);
         $changeSuccess = true;
         //Close connection
         $conn = NULL;   

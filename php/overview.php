@@ -43,32 +43,41 @@ if ($_SESSION['active'] != 1) {
             var pid = productid;
             var id = 'amountitem' + productid;
             var amount = document.getElementById(id).value;
-            $.ajax({
-            type: 'POST',
-            url: 'phpfunction/addproduct.php',
-            data: {
-                amount_product: amount,
-                product_id: pid,
-                cart_id: <?php echo $_SESSION['idcart']; ?>,
-            },
-            success: function(response){
-                if(response){
-                    swal({
-                        title: "Eingefügt",
-                        text: amount + " Produkt(e) wird in den Warenkorb erfolgreich eingefügt!",
-                        icon: "success",
-                        button: "OK!",
-                    });
+            if (amount>0) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'phpfunction/addproduct.php',
+                    data: {
+                        amount_product: amount,
+                        product_id: pid,
+                        cart_id: <?php echo $_SESSION['idcart']; ?>,
+                    },
+                    success: function(response){
+                        if(response){
+                            swal({
+                                title: "Eingefügt",
+                                text: amount + " Produkt(e) wird in den Warenkorb erfolgreich eingefügt!",
+                                icon: "success",
+                                button: "OK!",
+                            });
 
-                } else {
-                    swal({
-                        title: "Fehler",
-                        text: "Produkt nicht verfügbar!",
-                        icon: "error",
-                        button: "OK!",
+                        } else {
+                            swal({
+                                title: "Fehler",
+                                text: "Produkt nicht verfügbar!",
+                                icon: "error",
+                                button: "OK!",
+                            });
+                        }}
                     });
-                }}
-              });
+            }  else {
+                            swal({
+                                title: "Fehler",
+                                text: "Negative Stückzahl!",
+                                icon: "error",
+                                button: "OK!",
+                            });
+                        }
 
         }
 
