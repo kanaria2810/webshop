@@ -40,7 +40,7 @@ if (!isset($_SESSION['active'])) {
         $sql = "UPDATE webshop.wsuser SET password = '$newpw' WHERE username = '$emailaddress' AND token = '$token'";
         $conn->exec($sql);
         $sql = "UPDATE webshop.wsuser SET token = '' WHERE username = '$emailaddress'";
-        $conn -> execc($sql);
+        $conn -> exec($sql);
         $changeSuccess = true;
         //Close connection
         $conn = NULL;   
