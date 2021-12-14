@@ -10,6 +10,7 @@ About the structure, it uses PHP for backend and a MySQL database generated auto
 ## Installation
 1. Apache server
 You need to install xampp to run the app : https://www.apachefriends.org/de/download.html
+
 Add the downloaded folder to xampp\htdocs
 
 2. Database (you need to start MySQL server in xampp)
